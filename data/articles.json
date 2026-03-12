@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "site": "DELY — Pengamat Politik Dunia",
+    "author": "DELY",
+    "version": "1.0",
+    "lastUpdated": "2025-03-15"
+  },
+  "articles": [
+    {
+      "id": 1,
+      "title": "Pergeseran Tatanan Dunia: Dari Unipolar ke Multipolar",
+      "region": "global",
+      "date": "2025-03-15",
+      "readTime": 12,
+      "tags": ["Geopolitik", "Multipolar", "Indonesia"],
+      "featured": true
+    },
+    {
+      "id": 2,
+      "title": "Ketegangan Laut China Selatan: Eskalasi atau Diplomasi?",
+      "region": "asia",
+      "date": "2025-03-10",
+      "readTime": 8,
+      "tags": ["Asia", "China", "ASEAN", "Maritim"]
+    },
+    {
+      "id": 3,
+      "title": "Kebangkitan Populisme Sayap Kanan di Eropa",
+      "region": "eropa",
+      "date": "2025-03-05",
+      "readTime": 9,
+      "tags": ["Eropa", "Populisme", "Demokrasi"]
+    },
+    {
+      "id": 4,
+      "title": "Normalisasi Arab-Israel Pasca-Konflik Gaza",
+      "region": "timteng",
+      "date": "2025-03-01",
+      "readTime": 10,
+      "tags": ["Timur Tengah", "Diplomatik", "Perdamaian"]
+    },
+    {
+      "id": 5,
+      "title": "ASEAN di Persimpangan: Netralitas atau Ketegasan?",
+      "region": "asean",
+      "date": "2025-02-25",
+      "readTime": 7,
+      "tags": ["ASEAN", "Myanmar", "Non-Interferensi"]
+    },
+    {
+      "id": 6,
+      "title": "PBB dan Krisis Legitimasi di Abad ke-21",
+      "region": "global",
+      "date": "2025-02-20",
+      "readTime": 6,
+      "tags": ["PBB", "Multilateralisme", "Reformasi"]
+    }
+  ],
+  "kawasan": [
+    { "id": "indo-pasifik", "count": 42 },
+    { "id": "timur-tengah", "count": 38 },
+    { "id": "eropa",        "count": 55 },
+    { "id": "amerikalatin", "count": 29 },
+    { "id": "afrika",       "count": 31 },
+    { "id": "asean",        "count": 67 }
+  ]
+}
