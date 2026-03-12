@@ -1,0 +1,7 @@
+/* animations.css */
+.reveal-h1,.reveal-h2,.reveal-h3,.reveal-h4,.reveal-h5{opacity:0;transform:translateY(28px);animation:hUp .9s cubic-bezier(.25,.46,.45,.94) forwards;}
+.reveal-h1{animation-delay:.15s}.reveal-h2{animation-delay:.35s}.reveal-h3{animation-delay:.55s}.reveal-h4{animation-delay:.72s}.reveal-h5{animation-delay:.88s}
+@keyframes hUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .75s ease,transform .75s cubic-bezier(.25,.46,.45,.94);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}

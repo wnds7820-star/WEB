@@ -1,0 +1,60 @@
+/* responsive.css */
+@media(max-width:1024px){
+  .hero-container{grid-template-columns:1fr;gap:40px;padding:100px 48px 60px;}
+  .globe-card{max-width:420px;margin:0 auto;}
+  .about-grid{grid-template-columns:1fr;gap:48px;}
+  .analisis-grid{grid-template-columns:repeat(2,1fr);}
+  .artikel-card.featured{grid-column:span 2;}
+  .kawasan-grid{grid-template-columns:repeat(2,1fr);}
+  .publikasi-grid{grid-template-columns:repeat(2,1fr);}
+  .media-grid{grid-template-columns:repeat(3,1fr);}
+  .kontak-wrap{grid-template-columns:1fr;gap:48px;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px;}
+}
+@media(max-width:768px){
+  section{padding:72px 0;}
+  .container{padding:0 24px;}
+  .nav-container{padding:0 24px;}
+  .nav-menu{display:none;flex-direction:column;position:fixed;inset:0;background:var(--ivory);z-index:400;align-items:center;justify-content:center;gap:24px;}
+  .nav-menu.open{display:flex;}
+  .nav-link{font-size:18px;}
+  .hamburger{display:flex;z-index:500;}
+  .hero-title{font-size:44px;}
+  .analisis-grid{grid-template-columns:1fr;}
+  .artikel-card.featured{grid-column:span 1;}
+  .kawasan-grid{grid-template-columns:1fr;}
+  .publikasi-grid{grid-template-columns:1fr;}
+  .media-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr;}
+  .fb-inner{flex-direction:column;text-align:center;}
+  #sec-badge{display:none;}
+}
+@media(max-width:480px){
+  .hero-title{font-size:36px;}
+  .hero-actions{flex-direction:column;}
+  .btn-primary,.btn-ghost{width:100%;justify-content:center;}
+  .globe-stats{flex-direction:column;gap:12px;}
+  .gs-div{display:none;}
+}
+
+/* Extra responsive fixes */
+@media(max-width:1024px){
+  .debat-grid{grid-template-columns:1fr;}
+  .indikator-grid{grid-template-columns:repeat(2,1fr);}
+  .kawasan-grid{grid-template-columns:repeat(3,1fr);}
+  .publikasi-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .debat-sides{flex-direction:column;}
+  .debat-vs{writing-mode:horizontal-tb;padding:4px;}
+  .indikator-grid{grid-template-columns:1fr;}
+  .kawasan-grid{grid-template-columns:1fr 1fr;}
+  .approach-grid{grid-template-columns:1fr;}
+  .news-ticker{height:32px;}
+  .ticker-inner span{font-size:11px;padding:0 24px;}
+  .quick-contacts{margin-top:20px;}
+}
+@media(max-width:480px){
+  .kawasan-grid{grid-template-columns:1fr;}
+  .debat-grid{gap:16px;}
+}
