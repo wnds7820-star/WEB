@@ -676,3 +676,136 @@ footer { background: var(--night); border-top: 1px solid rgba(201,151,58,0.2); }
 
 /* ── BODY SCROLL LOCK when menu open ── */
 body.menu-open { overflow: hidden; }
+
+/* ══════════════════════════════════════════
+   DARK MODE TOGGLE BUTTON
+   ══════════════════════════════════════════ */
+.dark-toggle {
+  background: none; border: 1px solid rgba(201,151,58,0.3);
+  border-radius: 20px; padding: 5px 10px; cursor: pointer;
+  display: flex; align-items: center; gap: 4px;
+  transition: border-color 0.2s, background 0.2s;
+  margin-right: 8px; flex-shrink: 0;
+}
+.dark-toggle:hover { border-color: var(--gold); background: rgba(201,151,58,0.1); }
+.dt-icon { font-size: 14px; line-height: 1; transition: opacity 0.2s, transform 0.3s; }
+.dt-sun  { display: none; }
+body.light-mode .dt-moon { display: none; }
+body.light-mode .dt-sun  { display: inline; }
+
+/* ══════════════════════════════════════════
+   LIGHT MODE — override dark defaults
+   ══════════════════════════════════════════ */
+body.light-mode {
+  background: #f5f0e8;
+  color: #2a1f10;
+}
+body.light-mode #navbar {
+  background: rgba(245,240,232,0.95) !important;
+  border-bottom: 1px solid rgba(139,90,40,0.15);
+}
+body.light-mode #navbar.scrolled {
+  background: rgba(245,240,232,0.98) !important;
+}
+body.light-mode .nav-link,
+body.light-mode .brand-text strong,
+body.light-mode .brand-text span {
+  color: #2a1f10 !important;
+}
+body.light-mode .nav-link:hover { color: var(--gold) !important; }
+body.light-mode .hamburger span { background: #2a1f10; }
+body.light-mode .dark-toggle { border-color: rgba(139,90,40,0.4); }
+
+/* Hero stays dark (bg foto gelap) */
+body.light-mode #hero { background: #1a1208; }
+
+/* Stats strip */
+body.light-mode .stats-strip { background: #ede5d0; border-color: rgba(139,90,40,0.15); }
+body.light-mode .ss-num { color: var(--gold); }
+body.light-mode .ss-label { color: #5a4020; }
+
+/* Sections */
+body.light-mode section { background: transparent; }
+body.light-mode .section-title { color: #2a1f10; }
+body.light-mode .section-tag { color: var(--gold); border-color: rgba(201,151,58,0.4); }
+body.light-mode .section-line { background: var(--gold); }
+
+/* Artikel cards */
+body.light-mode .art-card {
+  background: #fff8ef;
+  border-color: rgba(139,90,40,0.15);
+  box-shadow: 0 2px 12px rgba(139,90,40,0.08);
+}
+body.light-mode .art-card:hover { border-color: rgba(201,151,58,0.4); }
+body.light-mode .art-body h3 { color: #2a1f10; }
+body.light-mode .art-body p  { color: #5a4020; }
+body.light-mode .art-meta    { color: #8a6040; }
+
+/* Peradaban overlay */
+body.light-mode .perad-name { color: #f4edd8; }
+body.light-mode .perad-badge { background: rgba(0,0,0,0.5); }
+
+/* Blueprint cards */
+body.light-mode .bp-card {
+  background: #fff8ef;
+  border-color: rgba(139,90,40,0.15);
+}
+body.light-mode .bp-name  { color: #2a1f10; }
+body.light-mode .bp-era   { color: var(--gold); }
+body.light-mode .bp-desc  { color: #5a4020; }
+body.light-mode .bp-spec-label { color: #8a6040; }
+body.light-mode .bp-spec-val   { color: #2a1f10; }
+
+/* Tokoh cards */
+body.light-mode .tokoh-card {
+  background: #fff8ef;
+  border-color: rgba(139,90,40,0.15);
+}
+body.light-mode .tokoh-name { color: #2a1f10; }
+body.light-mode .tokoh-role { color: var(--gold); }
+body.light-mode .tokoh-desc { color: #5a4020; }
+
+/* Kutipan */
+body.light-mode .kutipan-section { background: #ede5d0; }
+body.light-mode .kutipan-text { color: #2a1f10; }
+body.light-mode .kutipan-src  { color: #8a6040; }
+
+/* Perang timeline */
+body.light-mode .pw-header { color: #2a1f10; }
+body.light-mode .htl-year  { color: var(--gold); }
+body.light-mode .htl-title { color: #2a1f10; }
+body.light-mode .htl-desc  { color: #5a4020; }
+body.light-mode .pw-stat-num   { color: #8b1a1a; }
+body.light-mode .pw-stat-label { color: #5a4020; }
+
+/* Kontak form */
+body.light-mode .kontak-section { background: #ede5d0; }
+body.light-mode .kontak-left h2 { color: #2a1f10; }
+body.light-mode .kontak-left p  { color: #5a4020; }
+body.light-mode .fg label { color: #5a4020; }
+body.light-mode .fg input,
+body.light-mode .fg textarea,
+body.light-mode .fg select {
+  background: #fff8ef;
+  border-color: rgba(139,90,40,0.25);
+  color: #2a1f10;
+}
+body.light-mode .fg input:focus,
+body.light-mode .fg textarea:focus {
+  border-color: var(--gold);
+  background: #ffffff;
+}
+
+/* Footer */
+body.light-mode footer { background: #2a1f10; }
+
+/* Era ticker */
+body.light-mode .era-ticker { background: #2a1f10; }
+
+/* Cuaca */
+body.light-mode .cuaca-card {
+  background: #fff8ef;
+  border-color: rgba(139,90,40,0.15);
+}
+body.light-mode .cuaca-val  { color: #2a1f10; }
+body.light-mode .cuaca-desc { color: #5a4020; }

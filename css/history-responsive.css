@@ -88,6 +88,9 @@ body { overflow-x: hidden; }
   .nav-container  { padding: 0 16px; }
   section         { padding: 56px 0; }
 
+  .dark-toggle    { margin-right: 4px; padding: 4px 8px; }
+  .dt-icon        { font-size: 13px; }
+
   .hero-container { padding: 90px 16px 48px; }
   .hero-title     { font-size: clamp(26px, 8vw, 40px); }
   .hero-subtitle  { font-size: 15px; }
@@ -205,6 +208,9 @@ body { overflow-x: hidden; }
   .fg input, .fg textarea, .fg select { padding: 12px 11px; }
   .btn-kirim      { padding: 15px; }
   .captcha-box    { padding: 12px; }
+
+  .dark-toggle    { padding: 3px 7px; }
+  .dt-icon        { font-size: 12px; }
 
   .fb-logo        { font-size: 14px; letter-spacing: 2px; }
 }
