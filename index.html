@@ -2,9 +2,22 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="description" content="DELY — Sejarawan Dunia. Mengkaji peradaban besar: WW1, WW2, Islam, Sriwijaya, Mongolia, Persia, Roma dan warisan sejarah umat manusia.">
   <meta name="author" content="DELY">
+  <meta name="theme-color" content="#0d0a06">
+  <!-- Android Chrome -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DELY Sejarah">
+  <!-- IE/Edge legacy -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Open Graph -->
+  <meta property="og:title" content="DELY — Penjelajah Sejarah Dunia">
+  <meta property="og:description" content="Kajian peradaban besar umat manusia: Roma, Persia, Mongol, Sriwijaya, Islam, WW1, WW2.">
+  <meta property="og:type" content="website">
   <title>DELY — Penjelajah Sejarah Dunia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=IM+Fell+English:ital@0;1&family=Spectral+SC:wght@400;600&display=swap" rel="stylesheet">
@@ -14,6 +27,23 @@
 
   <!-- Inline extra styles for features integration -->
   <style>
+    /* ── SAFE AREA (Notch / Camera Punch-hole Android) ── */
+    #navbar {
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+      padding-top: env(safe-area-inset-top);
+    }
+    .nav-container {
+      padding-left: max(40px, env(safe-area-inset-left));
+      padding-right: max(40px, env(safe-area-inset-right));
+    }
+    @media (max-width: 767px) {
+      .nav-container { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
+    }
+    footer .fb-inner {
+      padding-bottom: max(20px, env(safe-area-inset-bottom));
+    }
+
     /* BG Toggle */
     #bgToggleBtn {
       position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
@@ -43,38 +73,29 @@
     .ww-city { color: #c9973a !important; }
     .ww-temp { font-family: 'Cinzel', serif !important; }
     
-    /* Weather section in sidebar */
+    /* Weather section */
     .cuaca-wrap {
       display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
       margin-top: 48px; align-items: start;
     }
-    @media(max-width:768px){.cuaca-wrap{grid-template-columns:1fr;}}
+    @media(max-width:767px){ .cuaca-wrap { grid-template-columns: 1fr; } }
 
     /* Artikel extra filters */
     .afil-btn.active { background: rgba(201,151,58,0.1); }
 
-    /* Debat section reuse */
-    #debat { background: #0a0806; }
+    /* Blueprint section */
+    #debat { background: #070503; }
     #debat .section-tag { color: #c9973a; border-color: rgba(201,151,58,0.3); }
     #debat .section-title, #debat .section-desc { color: #f4edd8; }
     #debat .section-desc { color: rgba(244,237,216,0.5); }
-    .debat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .debat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(201,151,58,0.1); padding: 28px; transition: border-color 0.3s; }
-    .debat-card:hover { border-color: rgba(201,151,58,0.35); }
-    .debat-topik { font-family: 'Cinzel', serif; font-size: 16px; color: #f4edd8; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid rgba(201,151,58,0.1); }
-    .debat-sides { display: flex; gap: 12px; margin-bottom: 16px; }
-    .debat-pro, .debat-con { flex: 1; padding: 14px; }
-    .debat-pro { background: rgba(46,125,50,0.08); border: 1px solid rgba(46,125,50,0.2); }
-    .debat-con { background: rgba(139,26,26,0.1); border: 1px solid rgba(139,26,26,0.25); }
-    .debat-side-label { font-size: 9px; font-family: 'Spectral SC', serif; letter-spacing: 2px; display: block; margin-bottom: 8px; }
-    .debat-side-label.pro { color: #81c784; }
-    .debat-side-label.con { color: #ff8a80; }
-    .debat-pro p, .debat-con p { font-size: 13px; color: rgba(244,237,216,0.55); line-height: 1.7; margin: 0; }
-    .debat-vs { display: flex; align-items: center; justify-content: center; font-family: 'Spectral SC', serif; font-size: 10px; color: rgba(244,237,216,0.2); flex-shrink: 0; writing-mode: vertical-rl; letter-spacing: 2px; }
-    .debat-verdict { background: rgba(201,151,58,0.05); border: 1px solid rgba(201,151,58,0.2); padding: 14px; margin-top: 4px; }
-    .verdict-label { font-size: 9px; font-family: 'Spectral SC', serif; letter-spacing: 2px; color: #c9973a; display: block; margin-bottom: 6px; }
-    .debat-verdict p { font-size: 13px; color: rgba(244,237,216,0.6); line-height: 1.7; margin: 0; }
-    @media(max-width:768px){.debat-grid{grid-template-columns:1fr;}.debat-sides{flex-direction:column;}.debat-vs{writing-mode:horizontal-tb;padding:4px;}}
+
+    /* ── MOBILE PERFORMANCE ── */
+    .perad-img, .art-img img, .bp-img-wrap img, .galeri-item img {
+      will-change: transform;
+      contain: layout style paint;
+    }
+    /* Lazy load placeholder shimmer */
+    img[loading="lazy"] { background: #1a1208; }
   </style>
 </head>
 <body>
@@ -99,7 +120,7 @@
         <li><a href="#artikel"   class="nav-link">Artikel</a></li>
         <li><a href="#kutipan"   class="nav-link">Kutipan</a></li>
         <li><a href="#tokoh"     class="nav-link">Tokoh</a></li>
-        <li><a href="#debat"     class="nav-link">Debat</a></li>
+        <li><a href="#debat"     class="nav-link">Blueprint</a></li>
         <li><a href="#galeri"    class="nav-link">Galeri</a></li>
         <li><a href="#cuaca"     class="nav-link">Semarang</a></li>
         <li><a href="#kontak"    class="nav-cta">Hubungi</a></li>
@@ -149,7 +170,7 @@
           Peradaban Dunia
         </h1>
         <p class="hero-subtitle">
-          Saya <strong>DELY</strong> — sejarawan dan peneliti independen dari <strong>Semarang</strong> yang mendedikasikan hidup untuk mengkaji kejayaan dan keruntuhan peradaban besar umat manusia: dari Roma hingga Mongol, dari Sriwijaya hingga Perang Dunia.
+          Halo! Perkenalkan, saya <strong>DELY</strong>. Di sini kita akan belajar bersama tentang sejarah peradaban besar dunia — mulai dari kejayaan Romawi dan Mongol, keindahan masa keemasan Islam, hingga kisah heroik Kerajaan Sriwijaya dan tragedi Perang Dunia. Sejarah bukan sekadar hafalan tanggal, tapi pelajaran hidup yang bisa kita ambil dari masa lalu! 📚
         </p>
         <div class="hero-actions">
           <a href="#peradaban" class="btn-primary">Jelajahi Peradaban</a>
@@ -210,10 +231,8 @@
       <div class="perad-card reveal" data-anchor="artikel">
         <img class="perad-img"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1280px-Colosseo_2020.jpg"
-          alt="Colosseum Roma"
-          loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#1a0f00,#3d2000);font-size:64px;align-items:center;justify-content:center">🏛️</div>
+          alt="Colosseum Roma" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Forum_of_Trajan_model_CIV.jpg/1280px-Forum_of_Trajan_model_CIV.jpg'">
         <div class="perad-overlay">
           <div class="perad-era">Kekaisaran Kuno</div>
           <div class="perad-badge">🏛️</div>
@@ -227,10 +246,8 @@
       <div class="perad-card reveal reveal-d1" data-anchor="artikel">
         <img class="perad-img"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Persepolis_Apadana_east_stairs.jpg/1280px-Persepolis_Apadana_east_stairs.jpg"
-          alt="Persepolis Persia"
-          loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#1a0800,#5c2800);font-size:64px;align-items:center;justify-content:center">🦁</div>
+          alt="Persepolis Persia" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Ruins_of_Persepolis.jpg/1280px-Ruins_of_Persepolis.jpg'">
         <div class="perad-overlay">
           <div class="perad-era">Kekaisaran Kuno</div>
           <div class="perad-badge">🦁</div>
@@ -244,10 +261,8 @@
       <div class="perad-card reveal reveal-d2" data-anchor="artikel">
         <img class="perad-img"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Genghis_Khan_on_horse.jpg/800px-Genghis_Khan_on_horse.jpg"
-          alt="Genghis Khan"
-          loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#0a1a00,#1a3300);font-size:64px;align-items:center;justify-content:center">🐴</div>
+          alt="Genghis Khan" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Yuan_Empire.png/1280px-Yuan_Empire.png'">
         <div class="perad-overlay">
           <div class="perad-era">Kekaisaran Abad Pertengahan</div>
           <div class="perad-badge">🐴</div>
@@ -260,11 +275,9 @@
       <!-- MASA KEEMASAN ISLAM -->
       <div class="perad-card reveal" data-anchor="artikel">
         <img class="perad-img"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Hagia_Sophia_Mars_2013.jpg/1280px-Hagia_Sophia_Mars_2013.jpg"
-          alt="Masa Keemasan Islam"
-          loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#0a1000,#1a2800);font-size:64px;align-items:center;justify-content:center">🕌</div>
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Mir-i-Arab_Madrasah_Bukhara.jpg/1280px-Mir-i-Arab_Madrasah_Bukhara.jpg"
+          alt="Masa Keemasan Islam" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Hagia_Sophia_Mars_2013.jpg/1280px-Hagia_Sophia_Mars_2013.jpg'">
         <div class="perad-overlay">
           <div class="perad-era">Zaman Keemasan</div>
           <div class="perad-badge">🕌</div>
@@ -278,10 +291,8 @@
       <div class="perad-card reveal reveal-d1" data-anchor="artikel">
         <img class="perad-img"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Muaro_Jambi_Temple.jpg/1280px-Muaro_Jambi_Temple.jpg"
-          alt="Kerajaan Sriwijaya"
-          loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#001a0a,#00331a);font-size:64px;align-items:center;justify-content:center">⛵</div>
+          alt="Kerajaan Sriwijaya" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Borobudur_ship.jpg/1280px-Borobudur_ship.jpg'">
         <div class="perad-overlay">
           <div class="perad-era">Nusantara</div>
           <div class="perad-badge">⛵</div>
@@ -295,10 +306,8 @@
       <div class="perad-card reveal reveal-d2" data-anchor="perang">
         <img class="perad-img"
           src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Into_the_Jaws_of_Death_23-0455M_edit.jpg"
-          alt="D-Day Normandy WW2"
-          loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#1a0000,#330000);font-size:64px;align-items:center;justify-content:center">⚔️</div>
+          alt="D-Day Normandy WW2" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Cheshire_Regiment_trench_Somme_1916.jpg/1280px-Cheshire_Regiment_trench_Somme_1916.jpg'">
         <div class="perad-overlay">
           <div class="perad-era">Perang Dunia</div>
           <div class="perad-badge">⚔️</div>
@@ -312,10 +321,8 @@
       <div class="perad-card reveal" data-anchor="artikel">
         <img class="perad-img"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Topkapi_palace_dsc04786.jpg/1280px-Topkapi_palace_dsc04786.jpg"
-          alt="Kekaisaran Ottoman"
-          loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#0d0020,#1a0040);font-size:64px;align-items:center;justify-content:center">☪️</div>
+          alt="Kekaisaran Ottoman" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Topkapi_Palace_%28Istanbul%29.jpg/1280px-Topkapi_Palace_%28Istanbul%29.jpg'">
         <div class="perad-overlay">
           <div class="perad-era">Kekaisaran Modern Awal</div>
           <div class="perad-badge">☪️</div>
@@ -325,14 +332,12 @@
         </div>
       </div>
 
-      <!-- MAYA / AZTEC -->
+      <!-- MAYA -->
       <div class="perad-card reveal reveal-d1" data-anchor="artikel">
         <img class="perad-img"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Chichen_Itza_3.jpg/1280px-Chichen_Itza_3.jpg"
-          alt="Peradaban Maya"
-          loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#001a10,#003320);font-size:64px;align-items:center;justify-content:center">🗿</div>
+          alt="Peradaban Maya" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/24701-Chichen-Itza.jpg/1280px-24701-Chichen-Itza.jpg'">
         <div class="perad-overlay">
           <div class="perad-era">Amerika Pra-Columbus</div>
           <div class="perad-badge">🗿</div>
@@ -346,10 +351,8 @@
       <div class="perad-card reveal reveal-d2" data-anchor="artikel">
         <img class="perad-img"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/20090529_great_wall_8185.jpg/1280px-20090529_great_wall_8185.jpg"
-          alt="Tembok Besar China"
-          loading="lazy"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#0a0010,#1a0030);font-size:64px;align-items:center;justify-content:center">🐉</div>
+          alt="Tembok Besar China" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/The_Great_Wall_of_China_at_Jinshanling-edit.jpg/1280px-The_Great_Wall_of_China_at_Jinshanling-edit.jpg'">
         <div class="perad-overlay">
           <div class="perad-era">Kekaisaran Timur</div>
           <div class="perad-badge">🐉</div>
@@ -527,7 +530,7 @@
 
       <div class="artikel-grid" id="artikelGrid">
 
-        <!-- FEATURED -->
+        <!-- FEATURED WW2 D-Day -->
         <div class="art-card featured reveal" data-era="ww2">
           <div class="art-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Into_the_Jaws_of_Death_23-0455M_edit.jpg" alt="D-Day" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
@@ -539,10 +542,11 @@
             <div class="art-meta">6 Jun 1944 · 15 mnt baca</div>
             <h3>D-Day: Satu Hari yang Mengubah Nasib Eropa dan Dunia Selamanya</h3>
             <p>Operation Overlord bukan sekadar pendaratan militer — ini adalah perjudian terbesar sejarah modern. Eisenhower, cuaca buruk, 156.000 prajurit, dan lima pantai yang menjadi monumen kebebasan manusia.</p>
-            <a href="#" class="art-read">Baca Analisis Penuh →</a>
+            <a href="https://www.nationalww2museum.org/war/articles/d-day-june-6-1944" target="_blank" rel="noopener" class="art-read">Baca di National WW2 Museum →</a>
           </div>
         </div>
 
+        <!-- Roma Runtuh -->
         <div class="art-card reveal reveal-d1" data-era="romawi">
           <div class="art-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/800px-Colosseo_2020.jpg" alt="Colosseum" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
@@ -553,10 +557,11 @@
             <div class="art-meta">Roma · 9 mnt</div>
             <h3>Mengapa Roma Runtuh? 10 Faktor yang Menghancurkan Imperium Terbesar</h3>
             <p>Korupsi, migrasi, inflasi, dan krisis kepemimpinan — kejatuhan Roma adalah cermin yang menakutkan bagi peradaban modern.</p>
-            <a href="#" class="art-read">Baca →</a>
+            <a href="https://www.britannica.com/story/8-reasons-why-rome-fell" target="_blank" rel="noopener" class="art-read">Baca di Britannica →</a>
           </div>
         </div>
 
+        <!-- Genghis Khan -->
         <div class="art-card reveal reveal-d2" data-era="mongol">
           <div class="art-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Genghis_Khan_on_horse.jpg/600px-Genghis_Khan_on_horse.jpg" alt="Genghis Khan" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
@@ -567,10 +572,11 @@
             <div class="art-meta">1206 M · 11 mnt</div>
             <h3>Genghis Khan: Penakluk atau Modernisator? Warisan yang Kontroversial</h3>
             <p>Ia membantai jutaan orang, namun juga membuka kebebasan beragama dan jalur perdagangan global terbesar sebelum era modern.</p>
-            <a href="#" class="art-read">Baca →</a>
+            <a href="https://www.nationalgeographic.com/history/article/genghis-khan" target="_blank" rel="noopener" class="art-read">Baca di National Geographic →</a>
           </div>
         </div>
 
+        <!-- Bayt al-Hikmah -->
         <div class="art-card reveal" data-era="islam">
           <div class="art-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Mir-i-Arab_Madrasah_Bukhara.jpg/800px-Mir-i-Arab_Madrasah_Bukhara.jpg" alt="Arsitektur Islam" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
@@ -581,10 +587,11 @@
             <div class="art-meta">Baghdad, 800 M · 10 mnt</div>
             <h3>Bayt al-Hikmah: Ketika Baghdad Menjadi Ibu Kota Ilmu Pengetahuan Dunia</h3>
             <p>Selama lima abad, para ilmuwan Muslim menerjemahkan, memperluas, dan melampaui warisan intelektual Yunani, Persia, dan India.</p>
-            <a href="#" class="art-read">Baca →</a>
+            <a href="https://www.1001inventions.com/house-of-wisdom/" target="_blank" rel="noopener" class="art-read">Baca di 1001 Inventions →</a>
           </div>
         </div>
 
+        <!-- Sriwijaya -->
         <div class="art-card reveal reveal-d1" data-era="sriwijaya">
           <div class="art-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Muaro_Jambi_Temple.jpg/800px-Muaro_Jambi_Temple.jpg" alt="Sriwijaya" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
@@ -595,10 +602,11 @@
             <div class="art-meta">Nusantara · 8 mnt</div>
             <h3>Sriwijaya: Kerajaan Maritim yang Menguasai Dunia dari Palembang</h3>
             <p>700 tahun mengendalikan Selat Malaka — arteri perdagangan terpenting dunia. Bagaimana kerajaan ini bisa hilang dari ingatan kita?</p>
-            <a href="#" class="art-read">Baca →</a>
+            <a href="https://www.worldhistory.org/Srivijaya_Empire/" target="_blank" rel="noopener" class="art-read">Baca di World History Encyclopedia →</a>
           </div>
         </div>
 
+        <!-- Koresh Agung / Persia -->
         <div class="art-card reveal reveal-d2" data-era="persia">
           <div class="art-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Persepolis_Apadana_east_stairs.jpg/800px-Persepolis_Apadana_east_stairs.jpg" alt="Persepolis" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
@@ -609,10 +617,11 @@
             <div class="art-meta">Persepolis · 9 mnt</div>
             <h3>Koresh Agung dan Silinder Hak Asasi Manusia Pertama di Dunia</h3>
             <p>Pada 539 SM, Koresh membebaskan budak dan menjamin kebebasan beragama. Ini bukan mitos — silinder tanah liatnya ada di Museum Inggris.</p>
-            <a href="#" class="art-read">Baca →</a>
+            <a href="https://www.britishmuseum.org/collection/object/W_1880-0617-1941" target="_blank" rel="noopener" class="art-read">Lihat di British Museum →</a>
           </div>
         </div>
 
+        <!-- WW1 Parit -->
         <div class="art-card reveal" data-era="ww1">
           <div class="art-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Cheshire_Regiment_trench_Somme_1916.jpg/800px-Cheshire_Regiment_trench_Somme_1916.jpg" alt="WW1 Trench" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
@@ -623,10 +632,11 @@
             <div class="art-meta">1916 M · 12 mnt</div>
             <h3>Kehidupan di Parit: Trauma Perang yang Melahirkan Sastra Modernisme</h3>
             <p>Lumpur, gas mustard, dan kematian tanpa arti. Para penyair seperti Wilfred Owen mengubah pengalaman neraka menjadi literatur abadi.</p>
-            <a href="#" class="art-read">Baca →</a>
+            <a href="https://www.iwm.org.uk/history/life-in-the-trenches-of-the-first-world-war" target="_blank" rel="noopener" class="art-read">Baca di Imperial War Museum →</a>
           </div>
         </div>
 
+        <!-- Maya -->
         <div class="art-card reveal reveal-d1" data-era="lain">
           <div class="art-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Chichen_Itza_3.jpg/800px-Chichen_Itza_3.jpg" alt="Maya Chichen Itza" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
@@ -637,10 +647,11 @@
             <div class="art-meta">2000 SM — 900 M · 10 mnt</div>
             <h3>Misteri Runtuhnya Peradaban Maya Klasik: Kekeringan, Perang, atau Sesuatu yang Lain?</h3>
             <p>Dalam satu abad, kota-kota megah Maya ditinggalkan. Arkeologi modern mulai mengungkap jawaban yang lebih kompleks dari dugaan semula.</p>
-            <a href="#" class="art-read">Baca →</a>
+            <a href="https://www.smithsonianmag.com/science-nature/why-did-maya-civilization-collapse-180974699/" target="_blank" rel="noopener" class="art-read">Baca di Smithsonian Magazine →</a>
           </div>
         </div>
 
+        <!-- Tembok Besar China -->
         <div class="art-card reveal reveal-d2" data-era="lain">
           <div class="art-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/20090529_great_wall_8185.jpg/800px-20090529_great_wall_8185.jpg" alt="Great Wall" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
@@ -651,10 +662,11 @@
             <div class="art-meta">Dinasti Qin · 8 mnt</div>
             <h3>Tembok Besar China: Monumen Ketakutan atau Keajaiban Rekayasa?</h3>
             <p>Dibangun selama 2.000 tahun oleh jutaan pekerja paksa — tembok ini tidak pernah benar-benar menghentikan invasi, tapi mengajarkan banyak tentang ambisi manusia.</p>
-            <a href="#" class="art-read">Baca →</a>
+            <a href="https://www.britannica.com/topic/Great-Wall-of-China" target="_blank" rel="noopener" class="art-read">Baca di Britannica →</a>
           </div>
         </div>
 
+        <!-- Stalingrad -->
         <div class="art-card reveal" data-era="ww2">
           <div class="art-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Bundesarchiv_Bild_101I-218-0504-36%2C_Russland-Mitte%2C_Soldat_mit_Panzerfaust.jpg/644px-Bundesarchiv_Bild_101I-218-0504-36%2C_Russland-Mitte%2C_Soldat_mit_Panzerfaust.jpg" alt="WW2 Eastern Front" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
@@ -665,10 +677,11 @@
             <div class="art-meta">1942–1943 · 14 mnt</div>
             <h3>Pertempuran Stalingrad: 200 Hari di Kota yang Tidak Boleh Jatuh</h3>
             <p>Hitler vs Stalin — dua diktator yang menggunakan kota sebagai simbol ego mereka. 2 juta korban dalam satu pertempuran yang menentukan nasib Perang Dunia II.</p>
-            <a href="#" class="art-read">Baca →</a>
+            <a href="https://www.britannica.com/event/Battle-of-Stalingrad" target="_blank" rel="noopener" class="art-read">Baca di Britannica →</a>
           </div>
         </div>
 
+        <!-- Konstantinopel / Ottoman -->
         <div class="art-card reveal reveal-d1" data-era="islam">
           <div class="art-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Topkapi_palace_dsc04786.jpg/800px-Topkapi_palace_dsc04786.jpg" alt="Ottoman" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
@@ -679,10 +692,11 @@
             <div class="art-meta">1453 M · 11 mnt</div>
             <h3>Jatuhnya Konstantinopel: Akhir Abad Pertengahan, Awal Dunia Modern</h3>
             <p>Ketika meriam raksasa Mehmed II meruntuhkan tembok yang bertahan 1.000 tahun, bukan hanya sebuah kota yang jatuh — sebuah era berakhir.</p>
-            <a href="#" class="art-read">Baca →</a>
+            <a href="https://www.worldhistory.org/article/1180/the-fall-of-constantinople-1453/" target="_blank" rel="noopener" class="art-read">Baca di World History Encyclopedia →</a>
           </div>
         </div>
 
+        <!-- Julius Caesar -->
         <div class="art-card reveal reveal-d2" data-era="romawi">
           <div class="art-img">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/GaiusJuliusCaesar.jpg/600px-GaiusJuliusCaesar.jpg" alt="Julius Caesar" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
@@ -693,7 +707,7 @@
             <div class="art-meta">44 SM · 9 mnt</div>
             <h3>Julius Caesar: Genius Militer yang Membunuh Republik dengan Caranya Sendiri</h3>
             <p>Veni, Vidi, Vici — tiga kata yang merangkum kepercayaan diri seorang pria yang mengubah Roma dari republik menjadi kekaisaran untuk selamanya.</p>
-            <a href="#" class="art-read">Baca →</a>
+            <a href="https://www.nationalgeographic.com/history/article/julius-caesar" target="_blank" rel="noopener" class="art-read">Baca di National Geographic →</a>
           </div>
         </div>
 
@@ -729,52 +743,156 @@
     </div>
   </section>
 
-  <!-- ══════════ DEBAT SEJARAH ══════════ -->
-  <section id="debat">
+  <!-- ══════════ BLUEPRINT SENJATA & KENDARAAN ══════════ -->
+  <section id="debat" style="background:#070503;">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-tag">Kontroversi Sejarah</div>
-        <h2 class="section-title">Debat Para Sejarawan</h2>
-        <p class="section-desc">Pertanyaan-pertanyaan besar sejarah yang masih diperdebatkan — dua perspektif, satu analisis.</p>
+        <div class="section-tag">Teknologi Militer Bersejarah</div>
+        <h2 class="section-title">Blueprint Senjata & Kendaraan</h2>
+        <p class="section-desc">Rancangan teknis senjata dan kendaraan paling ikonik yang mengubah jalannya peperangan dan sejarah peradaban manusia.</p>
         <div class="divider-ornament" style="color:rgba(201,151,58,0.4)">✦ ✦ ✦</div>
       </div>
-      <div class="debat-grid">
-        <div class="debat-card reveal">
-          <div class="debat-topik">🤔 Apakah Bom Atom Hiroshima Bisa Dibenarkan?</div>
-          <div class="debat-sides">
-            <div class="debat-pro"><div class="debat-side-label pro">PRO BOM ATOM</div><p>Invasi darat Jepang diperkirakan menelan 500.000–1 juta korban Sekutu dan jutaan warga Jepang. Bom atom, meski mengerikan, memperpendek perang dan menyelamatkan lebih banyak nyawa secara keseluruhan.</p></div>
-            <div class="debat-vs">VS</div>
-            <div class="debat-con"><div class="debat-side-label con">KONTRA BOM ATOM</div><p>Jepang sudah dalam posisi hampir kalah sebelum bom dijatuhkan. Pengeboman sipil tanpa peringatan adalah kejahatan perang. Tujuan sebenarnya adalah menakuti Soviet, bukan mengalahkan Jepang.</p></div>
+
+      <div class="bp-grid">
+
+        <!-- 1. SUPERMARINE SPITFIRE -->
+        <div class="bp-card reveal">
+          <div class="bp-era-badge ww2">WW2 · Inggris</div>
+          <div class="bp-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Supermarine_Spitfire_Mk_Ia_%283-view_silhouette%29.svg/1200px-Supermarine_Spitfire_Mk_Ia_%283-view_silhouette%29.svg.png"
+              alt="Spitfire Blueprint"
+              loading="lazy"
+              onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Spitfire_silhouette.jpg/800px-Spitfire_silhouette.jpg';this.onerror=null">
           </div>
-          <div class="debat-verdict"><span class="verdict-label">Analisis DELY:</span><p>Debat ini mencerminkan dilema moral perang yang tak terpecahkan. Data menunjukkan Jepang mempertimbangkan menyerah bahkan sebelum bom — tapi entah kapan. Konteks Perang Dingin yang mulai berkembang juga tidak bisa diabaikan.</p></div>
-        </div>
-        <div class="debat-card reveal reveal-d1">
-          <div class="debat-topik">🏛️ Apakah Roma Runtuh karena Faktor Internal atau Eksternal?</div>
-          <div class="debat-sides">
-            <div class="debat-pro"><div class="debat-side-label pro">FAKTOR INTERNAL</div><p>Edward Gibbon berpendapat kemunduran moral, Kristenisasi, korupsi politik, dan inflasi ekonomi adalah penyebab utama. Roma menghancurkan dirinya sendiri dari dalam.</p></div>
-            <div class="debat-vs">VS</div>
-            <div class="debat-con"><div class="debat-side-label con">FAKTOR EKSTERNAL</div><p>Tekanan invasi Hunnic yang mendorong gelombang migrasi barbar, wabah penyakit besar, dan perubahan iklim kecil adalah penyebab utama. Roma adalah korban kekuatan luar.</p></div>
+          <div class="bp-body">
+            <div class="bp-name">✈ Supermarine Spitfire</div>
+            <div class="bp-year">1936 — 1954</div>
+            <p class="bp-desc">Pesawat tempur legendaris Inggris yang menjadi simbol Pertempuran Britania. Dengan sayap eliptis khasnya, Spitfire mampu menandingi Messerschmitt Bf 109 milik Jerman Nazi.</p>
+            <div class="bp-specs">
+              <div class="bps-item"><span class="bps-label">Kecepatan Maks</span><span class="bps-val">594 km/jam</span></div>
+              <div class="bps-item"><span class="bps-label">Mesin</span><span class="bps-val">Rolls-Royce Merlin</span></div>
+              <div class="bps-item"><span class="bps-label">Senjata</span><span class="bps-val">8× Browning .303</span></div>
+              <div class="bps-item"><span class="bps-label">Unit Dibuat</span><span class="bps-val">20.351 unit</span></div>
+            </div>
+            <a href="https://www.iwm.org.uk/history/the-spitfire-an-iconic-aircraft" target="_blank" rel="noopener" class="bp-link">Pelajari lebih lanjut →</a>
           </div>
-          <div class="debat-verdict"><span class="verdict-label">Analisis DELY:</span><p>Sejarawan modern umumnya setuju: kombinasi keduanya. Yang menarik adalah Roma tidak runtuh tiba-tiba — prosesnya berlangsung 300 tahun. "Kejatuhan" Roma lebih merupakan transformasi bertahap daripada keruntuhan mendadak.</p></div>
         </div>
-        <div class="debat-card reveal">
-          <div class="debat-topik">🌊 Apakah Mongol Penghancur atau Pembawa Kemajuan?</div>
-          <div class="debat-sides">
-            <div class="debat-pro"><div class="debat-side-label pro">PENGHANCUR PERADABAN</div><p>Penghancuran Baghdad 1258, pembantaian jutaan orang di Persia dan Tiongkok, dan pembakaran perpustakaan — Mongol menghapus berabad-abad kemajuan peradaban dalam hitungan tahun.</p></div>
-            <div class="debat-vs">VS</div>
-            <div class="debat-con"><div class="debat-side-label con">PEMBUKA JALAN DUNIA</div><p>Pax Mongolica menciptakan keamanan jalur sutra pertama. Teknologi, agama, dan wabah penyakit menyebar lintas benua. Columbus mungkin tidak pernah berlayar tanpa peta yang dihasilkan dari era Mongol.</p></div>
+
+        <!-- 2. TIGER TANK -->
+        <div class="bp-card reveal reveal-d1">
+          <div class="bp-era-badge ww2">WW2 · Jerman</div>
+          <div class="bp-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/PzKpfwVI_tiger_bovington.jpg/800px-PzKpfwVI_tiger_bovington.jpg"
+              alt="Tiger Tank"
+              loading="lazy"
+              onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Bundesarchiv_Bild_101I-299-1802-08%2C_Nordfrankreich%2C_Panzer_VI_%28Tiger_I%29.jpg/800px-Bundesarchiv_Bild_101I-299-1802-08%2C_Nordfrankreich%2C_Panzer_VI_%28Tiger_I%29.jpg';this.onerror=null">
           </div>
-          <div class="debat-verdict"><span class="verdict-label">Analisis DELY:</span><p>Paradoks Mongol adalah yang paling menakjubkan dalam sejarah: penakluk paling destruktif sekaligus pemersatu terbesar peradaban Eurasia. Keduanya benar — dan tidak saling meniadakan.</p></div>
-        </div>
-        <div class="debat-card reveal reveal-d1">
-          <div class="debat-topik">⚗️ Seberapa Besar Kontribusi Ilmuwan Islam terhadap Sains Modern?</div>
-          <div class="debat-sides">
-            <div class="debat-pro"><div class="debat-side-label pro">KONTRIBUSI FUNDAMENTAL</div><p>Aljabar (Al-Jabr), optik (Ibnu al-Haytham), algoritma (Al-Khawarizmi), sistem angka desimal — tanpa masa keemasan Islam, Renaisans Eropa mungkin tidak pernah terjadi.</p></div>
-            <div class="debat-vs">VS</div>
-            <div class="debat-con"><div class="debat-side-label con">SEKADAR PENERJEMAH</div><p>Sebagian sejarawan berpendapat ilmuwan Muslim lebih berjasa menerjemahkan dan melestarikan ilmu Yunani daripada menciptakan yang benar-benar baru. Originalitasnya terbatas.</p></div>
+          <div class="bp-body">
+            <div class="bp-name">🛡 Panzerkampfwagen VI Tiger I</div>
+            <div class="bp-year">1942 — 1945</div>
+            <p class="bp-desc">Tank terkuat di medan Perang Dunia II. Dengan meriam 88mm yang mematikan dan baja setebal 100–120mm, satu Tiger mampu menghancurkan puluhan tank Sekutu sebelum bisa dihentikan.</p>
+            <div class="bp-specs">
+              <div class="bps-item"><span class="bps-label">Berat</span><span class="bps-val">54 ton</span></div>
+              <div class="bps-item"><span class="bps-label">Meriam</span><span class="bps-val">88mm KwK 36</span></div>
+              <div class="bps-item"><span class="bps-label">Armor</span><span class="bps-val">25–120 mm</span></div>
+              <div class="bps-item"><span class="bps-label">Unit Dibuat</span><span class="bps-val">1.347 unit</span></div>
+            </div>
+            <a href="https://tankmuseum.org/tank-story/tiger-i/" target="_blank" rel="noopener" class="bp-link">Pelajari lebih lanjut →</a>
           </div>
-          <div class="debat-verdict"><span class="verdict-label">Analisis DELY:</span><p>Pandangan "sekadar penerjemah" adalah kesalahan besar. Ibnu al-Haytham menemukan teori optik yang sepenuhnya baru. Al-Khawarizmi menciptakan algoritma, bukan menerjemahkan. Mereka adalah ilmuwan besar, bukan sekadar pustakawan.</p></div>
         </div>
+
+        <!-- 3. ROMAN BALLISTA -->
+        <div class="bp-card reveal reveal-d2">
+          <div class="bp-era-badge romawi">Roma Kuno</div>
+          <div class="bp-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Ballista_Diagram.jpg/800px-Ballista_Diagram.jpg"
+              alt="Ballista Roma"
+              loading="lazy"
+              onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Ballista-Cutaway.jpg/800px-Ballista-Cutaway.jpg';this.onerror=null">
+          </div>
+          <div class="bp-body">
+            <div class="bp-name">🏹 Ballista Romawi</div>
+            <div class="bp-year">400 SM — 400 M</div>
+            <p class="bp-desc">Senjata artileri paling canggih di zaman kuno. Ballista romawi mampu meluncurkan proyektil berat hingga 500 meter dengan akurasi tinggi — senjata penghancur benteng paling ditakuti di medan perang kuno.</p>
+            <div class="bp-specs">
+              <div class="bps-item"><span class="bps-label">Jangkauan</span><span class="bps-val">±500 meter</span></div>
+              <div class="bps-item"><span class="bps-label">Berat Proyektil</span><span class="bps-val">hingga 26 kg</span></div>
+              <div class="bps-item"><span class="bps-label">Operator</span><span class="bps-val">2–3 orang</span></div>
+              <div class="bps-item"><span class="bps-label">Material</span><span class="bps-val">Kayu, tali serat, logam</span></div>
+            </div>
+            <a href="https://www.worldhistory.org/Ballista/" target="_blank" rel="noopener" class="bp-link">Pelajari lebih lanjut →</a>
+          </div>
+        </div>
+
+        <!-- 4. MONGOL COMPOSITE BOW -->
+        <div class="bp-card reveal">
+          <div class="bp-era-badge mongol">Mongol</div>
+          <div class="bp-img-wrap" style="background:#0a0f06;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Mongol_recurve_bow.jpg/800px-Mongol_recurve_bow.jpg"
+              alt="Mongol Composite Bow"
+              loading="lazy"
+              onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Mongolian-recurve-bow.jpg/800px-Mongolian-recurve-bow.jpg';this.onerror=null">
+          </div>
+          <div class="bp-body">
+            <div class="bp-name">🏹 Busur Komposit Mongol</div>
+            <div class="bp-year">Abad ke-3 SM — 14 M</div>
+            <p class="bp-desc">Senjata yang memungkinkan Mongol menaklukkan dunia. Dibuat dari tanduk, tulang, kayu, dan sinew yang dilaminasi, busur ini memiliki tarikan hingga 75kg dan akurasi luar biasa bahkan dari atas kuda yang berlari.</p>
+            <div class="bp-specs">
+              <div class="bps-item"><span class="bps-label">Jangkauan Efektif</span><span class="bps-val">±300 meter</span></div>
+              <div class="bps-item"><span class="bps-label">Tarikan</span><span class="bps-val">60–75 kg</span></div>
+              <div class="bps-item"><span class="bps-label">Waktu Buat</span><span class="bps-val">1–3 tahun</span></div>
+              <div class="bps-item"><span class="bps-label">Material</span><span class="bps-val">Tanduk, tulang, kayu, sinew</span></div>
+            </div>
+            <a href="https://www.worldhistory.org/article/1553/the-mongol-bow/" target="_blank" rel="noopener" class="bp-link">Pelajari lebih lanjut →</a>
+          </div>
+        </div>
+
+        <!-- 5. BATTLESHIP YAMATO -->
+        <div class="bp-card reveal reveal-d1">
+          <div class="bp-era-badge ww2">WW2 · Jepang</div>
+          <div class="bp-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Yamato_under_air_attack_1945.jpg/800px-Yamato_under_air_attack_1945.jpg"
+              alt="Battleship Yamato"
+              loading="lazy"
+              onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Yamato1941.jpg/800px-Yamato1941.jpg';this.onerror=null">
+          </div>
+          <div class="bp-body">
+            <div class="bp-name">⚓ Kapal Perang Yamato</div>
+            <div class="bp-year">1941 — 1945</div>
+            <p class="bp-desc">Kapal perang terbesar yang pernah dibangun manusia. Yamato adalah kebanggaan Angkatan Laut Kekaisaran Jepang dengan meriam 460mm raksasa yang bisa menghancurkan target sejauh 42 km — namun tenggelam dihujani bom pada 7 April 1945.</p>
+            <div class="bp-specs">
+              <div class="bps-item"><span class="bps-label">Bobot</span><span class="bps-val">72.800 ton</span></div>
+              <div class="bps-item"><span class="bps-label">Meriam Utama</span><span class="bps-val">3× turret 460mm</span></div>
+              <div class="bps-item"><span class="bps-label">Panjang</span><span class="bps-val">263 meter</span></div>
+              <div class="bps-item"><span class="bps-label">Awak</span><span class="bps-val">2.767 orang</span></div>
+            </div>
+            <a href="https://www.britannica.com/topic/Yamato-Japanese-battleship" target="_blank" rel="noopener" class="bp-link">Pelajari lebih lanjut →</a>
+          </div>
+        </div>
+
+        <!-- 6. PERSIAN SCIMITAR / SHAMSHIR -->
+        <div class="bp-card reveal reveal-d2">
+          <div class="bp-era-badge persia">Persia</div>
+          <div class="bp-img-wrap" style="background:#120a02;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Shamshir_Sword.jpg/800px-Shamshir_Sword.jpg"
+              alt="Pedang Shamshir Persia"
+              loading="lazy"
+              onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Scimitar_style_saber_blade.jpg/800px-Scimitar_style_saber_blade.jpg';this.onerror=null">
+          </div>
+          <div class="bp-body">
+            <div class="bp-name">⚔ Pedang Shamshir Persia</div>
+            <div class="bp-year">Abad ke-9 M — 19 M</div>
+            <p class="bp-desc">Pedang melengkung khas Persia yang kemudian diadopsi seluruh dunia Islam dan Asia Tengah. Kelengkungan bilahnya dirancang khusus untuk serangan menebas dari atas kuda — senjata yang memadukan estetika dan fungsi secara sempurna.</p>
+            <div class="bp-specs">
+              <div class="bps-item"><span class="bps-label">Panjang Bilah</span><span class="bps-val">87–91 cm</span></div>
+              <div class="bps-item"><span class="bps-label">Sudut Kurva</span><span class="bps-val">±5–15 derajat</span></div>
+              <div class="bps-item"><span class="bps-label">Material</span><span class="bps-val">Baja Wootz / Damaskus</span></div>
+              <div class="bps-item"><span class="bps-label">Kekerasan</span><span class="bps-val">55–60 HRC</span></div>
+            </div>
+            <a href="https://www.metmuseum.org/toah/hd/isaa/hd_isaa.htm" target="_blank" rel="noopener" class="bp-link">Pelajari lebih lanjut →</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1019,11 +1137,24 @@
           </div>
         </div>
         <div>
-          <form class="kontak-form" id="kontakForm">
-            <div class="fg"><label>Nama Lengkap</label><input type="text" id="formNama" name="from_name" placeholder="Nama Anda" required></div>
-            <div class="fg"><label>Email Anda</label><input type="email" id="formEmail" name="reply_to" placeholder="email@domain.com" required></div>
+          <form class="kontak-form" id="kontakForm" novalidate>
+            <!-- HONEYPOT — bot isi ini, manusia tidak -->
+            <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0;overflow:hidden" aria-hidden="true">
+              <input type="text" id="hpField" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
             <div class="fg">
-              <label>Keperluan</label>
+              <label for="formNama">Nama Lengkap</label>
+              <input type="text" id="formNama" name="from_name" placeholder="Nama Anda" required minlength="2" autocomplete="name">
+              <span class="fg-err" id="errNama"></span>
+            </div>
+            <div class="fg">
+              <label for="formEmail">Email Anda</label>
+              <input type="email" id="formEmail" name="reply_to" placeholder="email@domain.com" required autocomplete="email">
+              <span class="fg-err" id="errEmail"></span>
+            </div>
+            <div class="fg">
+              <label for="formKeperluan">Keperluan</label>
               <select id="formKeperluan" name="subject">
                 <option>Diskusi Sejarah</option>
                 <option>Kuliah / Seminar</option>
@@ -1033,15 +1164,16 @@
                 <option>Lainnya</option>
               </select>
             </div>
-            <div class="fg"><label>Pesan</label><textarea rows="5" id="formPesan" name="message" placeholder="Apa yang ingin Anda diskusikan?" required></textarea></div>
-            <div class="captcha-box" id="captchaBox">
-              <div class="captcha-q"><span>Verifikasi: </span><strong id="captchaQ"></strong><span> = ?</span></div>
-              <input type="number" id="captchaAns" placeholder="Jawaban" required>
+            <div class="fg">
+              <label for="formPesan">Pesan</label>
+              <textarea rows="5" id="formPesan" name="message" placeholder="Apa yang ingin Anda diskusikan?" required minlength="10" autocomplete="off"></textarea>
+              <span class="fg-err" id="errPesan"></span>
             </div>
+
             <button type="submit" class="btn-kirim" id="submitBtn">
               <span id="submitText">✉ Kirim ke DELY</span>
             </button>
-            <div class="form-ok" id="formOk">✓ Pesan berhasil dikirim ke DELY! Anda akan mendapat konfirmasi di email.</div>
+            <div class="form-ok" id="formOk" style="display:none">✓ Pesan berhasil dikirim ke DELY! Biasanya dibalas dalam 1×24 jam.</div>
             <div class="form-err" id="formErr" style="display:none"></div>
           </form>
         </div>
@@ -1079,96 +1211,157 @@
   <script src="js/history.js"></script>
   <script src="js/features.js"></script>
   <script>
-    // ── EMAILJS INIT ──
-    // Untuk mengaktifkan: daftar di emailjs.com, buat service Gmail, buat template, isi ID di bawah
-    const EMAILJS_SERVICE_ID  = 'service_dely';      // Ganti dengan Service ID Anda
-    const EMAILJS_TEMPLATE_ID = 'template_dely';     // Ganti dengan Template ID Anda
-    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // Ganti dengan Public Key Anda
-    // Template EmailJS harus berisi: {{from_name}}, {{reply_to}}, {{subject}}, {{message}}
+  (function() {
+    'use strict';
 
-    document.addEventListener('DOMContentLoaded', () => {
-      // EmailJS init
-      if (typeof emailjs !== 'undefined') {
-        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-      }
+    // ══════════════════════════════════════════
+    //  EMAILJS CONFIG
+    //  Isi setelah daftar di emailjs.com (gratis)
+    // ══════════════════════════════════════════
+    var EJS_SERVICE  = 'service_dely';     // Ganti dengan Service ID Anda
+    var EJS_TEMPLATE = 'template_dely';    // Ganti dengan Template ID Anda
+    var EJS_KEY      = 'YOUR_PUBLIC_KEY';  // Ganti dengan Public Key Anda
 
-      // Ticker duplicate
-      const t = document.getElementById('etInner');
-      if (t) { const c = t.cloneNode(true); t.parentNode.appendChild(c); }
+    // ── EmailJS init (aman jika belum dikonfigurasi) ──
+    if (typeof emailjs !== 'undefined' && EJS_KEY !== 'YOUR_PUBLIC_KEY') {
+      try { emailjs.init({ publicKey: EJS_KEY }); } catch(e) {}
+    }
 
-      // ── FORM SUBMIT with EmailJS ──
-      const form = document.getElementById('kontakForm');
-      form?.addEventListener('submit', async (e) => {
+    // ══ TICKER DUPLICATE ══
+    var ticker = document.getElementById('etInner');
+    if (ticker && !ticker.nextElementSibling) {
+      ticker.parentNode.appendChild(ticker.cloneNode(true));
+    }
+
+    // ══ FORM ANTI-BOT (Honeypot) ══
+    // Tidak ada captcha — bot yang mengisi field tersembunyi akan ditolak
+    var _formReady = false;
+    var _formLoadTime = Date.now();
+
+    // Mark form as "human-interacted" setelah 2 detik
+    setTimeout(function() { _formReady = true; }, 2000);
+
+    // ══ INLINE VALIDATION HELPERS ══
+    function showErr(id, msg) {
+      var el = document.getElementById(id);
+      if (el) { el.textContent = msg; el.style.display = msg ? 'block' : 'none'; }
+    }
+    function clearErrors() {
+      ['errNama','errEmail','errPesan'].forEach(function(id) { showErr(id, ''); });
+      var fe = document.getElementById('formErr');
+      if (fe) fe.style.display = 'none';
+    }
+
+    function validateEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+    }
+
+    // ══ LIVE VALIDATION ══
+    var formNama  = document.getElementById('formNama');
+    var formEmail = document.getElementById('formEmail');
+    var formPesan = document.getElementById('formPesan');
+
+    if (formNama) formNama.addEventListener('blur', function() {
+      showErr('errNama', this.value.trim().length < 2 ? 'Nama minimal 2 karakter.' : '');
+    });
+    if (formEmail) formEmail.addEventListener('blur', function() {
+      showErr('errEmail', !validateEmail(this.value) ? 'Format email tidak valid.' : '');
+    });
+    if (formPesan) formPesan.addEventListener('blur', function() {
+      showErr('errPesan', this.value.trim().length < 10 ? 'Pesan minimal 10 karakter.' : '');
+    });
+
+    // ══ FORM SUBMIT ══
+    var form = document.getElementById('kontakForm');
+    if (form) {
+      form.addEventListener('submit', async function(e) {
         e.preventDefault();
-        const ans = parseInt(document.getElementById('captchaAns')?.value);
-        const ok  = document.getElementById('formOk');
-        const err = document.getElementById('formErr');
-        const btn = document.getElementById('submitBtn');
-        const txt = document.getElementById('submitText');
+        clearErrors();
 
-        // Check captcha first
-        if (ans !== window._captchaAnswer) {
-          err.textContent = '✗ Jawaban verifikasi salah. Coba lagi.';
-          err.style.display = 'block';
-          ok.style.display = 'none';
-          window._genCaptcha();
-          document.getElementById('captchaAns').value = '';
+        // Honeypot check — bot yang isi field tersembunyi ditolak diam-diam
+        var hp = document.getElementById('hpField');
+        if (hp && hp.value !== '') {
+          // Pura-pura sukses agar bot tidak tahu ditolak
+          document.getElementById('formOk').style.display = 'block';
+          form.reset();
           return;
         }
 
-        // Send via EmailJS
-        txt.textContent = '⏳ Mengirim...';
-        btn.disabled = true;
+        // Terlalu cepat? (< 2 detik sejak halaman dimuat) kemungkinan bot
+        if (!_formReady) {
+          document.getElementById('formOk').style.display = 'block';
+          form.reset();
+          return;
+        }
 
-        const templateParams = {
-          from_name: document.getElementById('formNama').value,
-          reply_to:  document.getElementById('formEmail').value,
-          subject:   document.getElementById('formKeperluan').value,
-          message:   document.getElementById('formPesan').value,
+        // Validasi manual
+        var nama  = formNama  ? formNama.value.trim()  : '';
+        var email = formEmail ? formEmail.value.trim()  : '';
+        var pesan = formPesan ? formPesan.value.trim()  : '';
+        var topik = (document.getElementById('formKeperluan') || {}).value || 'Lainnya';
+
+        var valid = true;
+        if (nama.length < 2)       { showErr('errNama',  'Nama minimal 2 karakter.');    valid = false; }
+        if (!validateEmail(email)) { showErr('errEmail', 'Format email tidak valid.');   valid = false; }
+        if (pesan.length < 10)     { showErr('errPesan', 'Pesan minimal 10 karakter.');  valid = false; }
+        if (!valid) return;
+
+        // UI: loading state
+        var btn = document.getElementById('submitBtn');
+        var txt = document.getElementById('submitText');
+        var ok  = document.getElementById('formOk');
+        var err = document.getElementById('formErr');
+        btn.disabled = true;
+        txt.textContent = '⏳ Mengirim...';
+        ok.style.display = 'none';
+        err.style.display = 'none';
+
+        var params = {
+          from_name: nama,
+          reply_to:  email,
+          subject:   topik,
+          message:   pesan,
           to_email:  'wnds7820@gmail.com'
         };
 
         try {
-          if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
-            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+          if (typeof emailjs !== 'undefined' && EJS_KEY !== 'YOUR_PUBLIC_KEY') {
+            // EmailJS sudah dikonfigurasi — kirim langsung
+            await emailjs.send(EJS_SERVICE, EJS_TEMPLATE, params);
           } else {
-            // Fallback: mailto link jika EmailJS belum dikonfigurasi
-            const subject = encodeURIComponent(`[DELY Sejarah] ${templateParams.subject} - dari ${templateParams.from_name}`);
-            const body = encodeURIComponent(`Nama: ${templateParams.from_name}\nEmail: ${templateParams.reply_to}\nKeperluan: ${templateParams.subject}\n\nPesan:\n${templateParams.message}`);
-            window.open(`mailto:wnds7820@gmail.com?subject=${subject}&body=${body}`, '_blank');
+            // Fallback: buka klien email default (mailto)
+            var subj = encodeURIComponent('[DELY Sejarah] ' + topik + ' — dari ' + nama);
+            var body = encodeURIComponent('Nama: ' + nama + '\nEmail: ' + email + '\nKeperluan: ' + topik + '\n\nPesan:\n' + pesan);
+            window.open('mailto:wnds7820@gmail.com?subject=' + subj + '&body=' + body, '_blank');
           }
+          // Sukses
           ok.style.display = 'block';
-          err.style.display = 'none';
           form.reset();
-          window._genCaptcha();
           txt.textContent = '✓ Terkirim!';
-          setTimeout(() => { txt.textContent = '✉ Kirim ke DELY'; btn.disabled = false; ok.style.display='none'; }, 5000);
-        } catch (error) {
-          err.textContent = '✗ Gagal mengirim. Coba lagi atau hubungi langsung via email.';
+          setTimeout(function() {
+            txt.textContent = '✉ Kirim ke DELY';
+            btn.disabled = false;
+            ok.style.display = 'none';
+            _formReady = true; // reset untuk submit ulang
+          }, 5000);
+
+        } catch (ex) {
+          // Error dari EmailJS
+          err.textContent = '✗ Gagal mengirim. Periksa koneksi internet Anda dan coba lagi.';
           err.style.display = 'block';
           txt.textContent = '✉ Kirim ke DELY';
           btn.disabled = false;
-          console.error('EmailJS error:', error);
+          console.warn('Send error:', ex);
         }
       });
-    });
+    }
 
-    // ── CAPTCHA (exposed globally for form handler) ──
-    window._captchaAnswer = 0;
-    window._genCaptcha = function() {
-      const a = Math.floor(Math.random()*15)+1, b = Math.floor(Math.random()*10)+1;
-      window._captchaAnswer = a + b;
-      const el = document.getElementById('captchaQ');
-      if (el) el.textContent = `${a} + ${b}`;
-    };
-    document.addEventListener('DOMContentLoaded', window._genCaptcha);
-
-    // ── CHART OVERRIDES (history theme colors) ──
+    // ══ CHART OVERRIDES ══
     window.renderArticleChart = function() {
-      if (!window.Chart) { if(typeof loadChartJS==='function') loadChartJS(window.renderArticleChart); return; }
-      const canvas = document.getElementById('articleChartCanvas');
+      if (!window.Chart) { if (typeof loadChartJS === 'function') loadChartJS(window.renderArticleChart); return; }
+      var canvas = document.getElementById('articleChartCanvas');
       if (!canvas) return;
-      const ex = Chart.getChart(canvas); if (ex) ex.destroy();
+      var ex = Chart.getChart(canvas); if (ex) ex.destroy();
       new Chart(canvas, {
         type: 'doughnut',
         data: {
@@ -1178,21 +1371,32 @@
         options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{ color:'rgba(244,237,216,0.5)', font:{size:11}, padding:10 } } } }
       });
     };
+
     window.renderVisitorChart = function() {
-      if (!window.Chart) { if(typeof loadChartJS==='function') loadChartJS(window.renderVisitorChart); return; }
-      const canvas = document.getElementById('visitorChartCanvas');
+      if (!window.Chart) { if (typeof loadChartJS === 'function') loadChartJS(window.renderVisitorChart); return; }
+      var canvas = document.getElementById('visitorChartCanvas');
       if (!canvas) return;
-      const ex = Chart.getChart(canvas); if (ex) ex.destroy();
+      var ex = Chart.getChart(canvas); if (ex) ex.destroy();
       new Chart(canvas, {
         type: 'line',
         data: {
           labels: ['Okt','Nov','Des','Jan','Feb','Mar'],
           datasets: [{ label:'Pembaca', data:[3200,4800,6200,5600,7900,10400], borderColor:'#c9973a', backgroundColor:'rgba(201,151,58,0.1)', fill:true, tension:0.5, pointRadius:3 }]
         },
-        options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:'rgba(244,237,216,0.35)',font:{size:10}},grid:{color:'rgba(201,151,58,0.05)'}}, y:{ticks:{color:'rgba(244,237,216,0.35)',font:{size:10}},grid:{color:'rgba(201,151,58,0.05)'}} } }
+        options: {
+          responsive:true, maintainAspectRatio:false,
+          plugins:{ legend:{ display:false } },
+          scales:{
+            x:{ ticks:{ color:'rgba(244,237,216,0.35)', font:{size:10} }, grid:{ color:'rgba(201,151,58,0.05)' } },
+            y:{ ticks:{ color:'rgba(244,237,216,0.35)', font:{size:10} }, grid:{ color:'rgba(201,151,58,0.05)' } }
+          }
+        }
       });
     };
-    window.renderRegionBarChart = function() {}; // not used
+
+    window.renderRegionBarChart = function() {};
+
+  })();
   </script>
 </body>
 </html>
