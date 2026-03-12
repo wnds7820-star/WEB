@@ -1,0 +1,72 @@
+# =============================================
+#  .htaccess — Server Security Rules
+#  DELY Pengamat Politik Dunia
+# =============================================
+
+# ── BLOCK ACCESS TO SENSITIVE FOLDERS ──
+<FilesMatch "\.(json|md|txt|log|bak|sql|config)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow data/articles.json only via referrer
+<Files "articles.json">
+    Order Deny,Allow
+    Deny from all
+    Allow from env=authorized
+</Files>
+
+# ── BLOCK DIRECTORY LISTING ──
+Options -Indexes
+
+# ── BLOCK ACCESS TO SECURITY FOLDER ──
+<Directory "security">
+    Order Deny,Allow
+    Deny from all
+</Directory>
+
+# ── SECURITY HEADERS ──
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:;"
+</IfModule>
+
+# ── FORCE HTTPS ──
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ── BLOCK BAD BOTS & SCANNERS ──
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_USER_AGENT} (nikto|sqlmap|nmap|masscan|zgrab) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ── BLOCK COMMON ATTACK PATTERNS ──
+<IfModule mod_rewrite.c>
+    RewriteCond %{QUERY_STRING} (union.*select|insert.*into|drop.*table) [NC]
+    RewriteRule .* - [F,L]
+    RewriteCond %{QUERY_STRING} (<script|javascript:) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ── PREVENT HOTLINKING ──
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_REFERER} !^$
+    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?politikdunia\.id [NC]
+    RewriteRule \.(jpg|jpeg|png|gif|svg)$ - [F,NC]
+</IfModule>
+
+# ── DISABLE SERVER SIGNATURE ──
+ServerSignature Off
+
+# ── ERROR PAGES ──
+ErrorDocument 403 /pages/403.html
+ErrorDocument 404 /pages/404.html

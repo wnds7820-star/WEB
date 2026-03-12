@@ -1,0 +1,33 @@
+{
+  "_note": "File ini adalah referensi konfigurasi keamanan. Jangan upload ke server publik.",
+  "security": {
+    "maxLoginAttempts": 5,
+    "lockoutDurationMs": 30000,
+    "sessionDurationMs": 900000,
+    "inactivityTimeoutMs": 900000,
+    "rateLimitContactForm": {
+      "maxRequests": 3,
+      "windowMs": 300000
+    },
+    "captcha": {
+      "type": "arithmetic",
+      "minSpamDelayMs": 3000
+    },
+    "headers": {
+      "X-Frame-Options": "DENY",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+    }
+  },
+  "features": {
+    "devToolsDetection": true,
+    "rightClickDisabled": true,
+    "keyboardShortcutBlock": true,
+    "autoSessionExpiry": true,
+    "inputSanitization": true,
+    "xssProtection": true,
+    "clickjackingProtection": true,
+    "securityEventLogging": true
+  }
+}
