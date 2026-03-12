@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DELY — Sejarawan Dunia. Mengkaji peradaban besar: WW1, WW2, Islam, Sriwijaya, Mongolia, Persia, Roma dan warisan sejarah umat manusia.">
+  <meta name="author" content="DELY">
+  <title>DELY — Penjelajah Sejarah Dunia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=IM+Fell+English:ital@0;1&family=Spectral+SC:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/history.css">
+  <link rel="stylesheet" href="css/history-responsive.css">
+  <link rel="stylesheet" href="css/features.css">
+
+  <!-- Inline extra styles for features integration -->
+  <style>
+    /* BG Toggle */
+    #bgToggleBtn {
+      position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+      z-index: 300; background: rgba(13,10,6,0.85);
+      border: 1px solid rgba(201,151,58,0.3); color: rgba(244,237,216,0.6);
+      padding: 10px 14px; font-size: 12px; cursor: pointer;
+      writing-mode: vertical-rl; letter-spacing: 1.5px; text-transform: uppercase;
+      font-family: 'Spectral SC', monospace; backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+    #bgToggleBtn:hover { border-color: #c9973a; color: #c9973a; }
+
+    /* Stats strip */
+    .stats-strip {
+      background: rgba(201,151,58,0.06); border-top: 1px solid rgba(201,151,58,0.15);
+      border-bottom: 1px solid rgba(201,151,58,0.15);
+      padding: 28px 0;
+    }
+    .stats-strip .container { display: flex; justify-content: center; gap: 0; }
+    .ss-item { text-align: center; padding: 0 48px; border-right: 1px solid rgba(201,151,58,0.15); }
+    .ss-item:last-child { border-right: none; }
+    .ss-num { font-family: 'Cinzel', serif; font-size: 38px; font-weight: 900; color: #c9973a; display: block; }
+    .ss-label { font-family: 'Spectral SC', serif; font-size: 10px; letter-spacing: 2px; color: rgba(244,237,216,0.35); }
+
+    /* Cuaca integration */
+    #weatherWidget { background: rgba(13,10,6,0.85); border: 1px solid rgba(201,151,58,0.2); }
+    .ww-city { color: #c9973a !important; }
+    .ww-temp { font-family: 'Cinzel', serif !important; }
+    
+    /* Weather section in sidebar */
+    .cuaca-wrap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+      margin-top: 48px; align-items: start;
+    }
+    @media(max-width:768px){.cuaca-wrap{grid-template-columns:1fr;}}
+
+    /* Artikel extra filters */
+    .afil-btn.active { background: rgba(201,151,58,0.1); }
+
+    /* Debat section reuse */
+    #debat { background: #0a0806; }
+    #debat .section-tag { color: #c9973a; border-color: rgba(201,151,58,0.3); }
+    #debat .section-title, #debat .section-desc { color: #f4edd8; }
+    #debat .section-desc { color: rgba(244,237,216,0.5); }
+    .debat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .debat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(201,151,58,0.1); padding: 28px; transition: border-color 0.3s; }
+    .debat-card:hover { border-color: rgba(201,151,58,0.35); }
+    .debat-topik { font-family: 'Cinzel', serif; font-size: 16px; color: #f4edd8; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid rgba(201,151,58,0.1); }
+    .debat-sides { display: flex; gap: 12px; margin-bottom: 16px; }
+    .debat-pro, .debat-con { flex: 1; padding: 14px; }
+    .debat-pro { background: rgba(46,125,50,0.08); border: 1px solid rgba(46,125,50,0.2); }
+    .debat-con { background: rgba(139,26,26,0.1); border: 1px solid rgba(139,26,26,0.25); }
+    .debat-side-label { font-size: 9px; font-family: 'Spectral SC', serif; letter-spacing: 2px; display: block; margin-bottom: 8px; }
+    .debat-side-label.pro { color: #81c784; }
+    .debat-side-label.con { color: #ff8a80; }
+    .debat-pro p, .debat-con p { font-size: 13px; color: rgba(244,237,216,0.55); line-height: 1.7; margin: 0; }
+    .debat-vs { display: flex; align-items: center; justify-content: center; font-family: 'Spectral SC', serif; font-size: 10px; color: rgba(244,237,216,0.2); flex-shrink: 0; writing-mode: vertical-rl; letter-spacing: 2px; }
+    .debat-verdict { background: rgba(201,151,58,0.05); border: 1px solid rgba(201,151,58,0.2); padding: 14px; margin-top: 4px; }
+    .verdict-label { font-size: 9px; font-family: 'Spectral SC', serif; letter-spacing: 2px; color: #c9973a; display: block; margin-bottom: 6px; }
+    .debat-verdict p { font-size: 13px; color: rgba(244,237,216,0.6); line-height: 1.7; margin: 0; }
+    @media(max-width:768px){.debat-grid{grid-template-columns:1fr;}.debat-sides{flex-direction:column;}.debat-vs{writing-mode:horizontal-tb;padding:4px;}}
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+  <button id="bgToggleBtn" onclick="toggleBgPanel()">🎨 Tema</button>
+  <div id="bgPanel"></div>
+
+  <!-- ══════════ NAVBAR ══════════ -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <div class="brand-emblem"><span class="brand-emblem-inner">⚔</span></div>
+        <div class="brand-text">
+          <strong>DELY</strong>
+          <span>Sejarah Dunia</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#peradaban" class="nav-link">Peradaban</a></li>
+        <li><a href="#perang"    class="nav-link">Perang Dunia</a></li>
+        <li><a href="#artikel"   class="nav-link">Artikel</a></li>
+        <li><a href="#kutipan"   class="nav-link">Kutipan</a></li>
+        <li><a href="#tokoh"     class="nav-link">Tokoh</a></li>
+        <li><a href="#debat"     class="nav-link">Debat</a></li>
+        <li><a href="#galeri"    class="nav-link">Galeri</a></li>
+        <li><a href="#cuaca"     class="nav-link">Semarang</a></li>
+        <li><a href="#kontak"    class="nav-cta">Hubungi</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-bg"></div>
+    <div class="hero-texture"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-era-badge">
+          <span class="era-dot"></span>
+          <span id="live-date">Rabu, 11 Maret 2026</span>
+        </div>
+        <h1 class="hero-title">
+          Menyelami<br>
+          <em>Warisan</em><br>
+          Peradaban Dunia
+        </h1>
+        <p class="hero-subtitle">
+          Saya <strong>DELY</strong> — sejarawan dan peneliti independen dari <strong>Semarang</strong> yang mendedikasikan hidup untuk mengkaji kejayaan dan keruntuhan peradaban besar umat manusia: dari Roma hingga Mongol, dari Sriwijaya hingga Perang Dunia.
+        </p>
+        <div class="hero-actions">
+          <a href="#peradaban" class="btn-primary">Jelajahi Peradaban</a>
+          <a href="#artikel" class="btn-ghost">Baca Artikel</a>
+        </div>
+      </div>
+      <div class="hero-timeline">
+        <a class="htl-item" href="#peradaban"><span class="htl-marker"></span><span class="htl-year">753 SM</span><div class="htl-body"><h5>Berdirinya Roma</h5><p>Dari desa kecil di tepi Tiber menjadi imperium yang mengatur dunia</p></div></a>
+        <a class="htl-item" href="#peradaban"><span class="htl-marker"></span><span class="htl-year">550 SM</span><div class="htl-body"><h5>Kekaisaran Persia Pertama</h5><p>Koresh Agung menyatukan Timur Dekat di bawah satu panji</p></div></a>
+        <a class="htl-item" href="#peradaban"><span class="htl-marker"></span><span class="htl-year">600 M</span><div class="htl-body"><h5>Sriwijaya Berjaya</h5><p>Nusantara memimpin perdagangan maritim Asia Tenggara</p></div></a>
+        <a class="htl-item" href="#peradaban"><span class="htl-marker"></span><span class="htl-year">750 M</span><div class="htl-body"><h5>Masa Keemasan Islam</h5><p>Baghdad menjadi pusat ilmu pengetahuan dunia</p></div></a>
+        <a class="htl-item" href="#peradaban"><span class="htl-marker"></span><span class="htl-year">1206 M</span><div class="htl-body"><h5>Kekaisaran Mongol</h5><p>Temujin menyatukan stepa dan menaklukkan dari Pasifik ke Eropa</p></div></a>
+        <a class="htl-item" href="#perang"><span class="htl-marker"></span><span class="htl-year">1914 M</span><div class="htl-body"><h5>Perang Dunia I</h5><p>Pembunuhan di Sarajevo memicu konflik yang mengubah peta dunia</p></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ TICKER ══════════ -->
+  <div class="era-ticker">
+    <div class="et-label">📜 SEJARAH</div>
+    <div class="et-track">
+      <div class="et-inner" id="etInner">
+        <span>Roma dibangun di atas tujuh bukit — dan runtuh karena seribu kelemahan di dalamnya &nbsp;•&nbsp;</span>
+        <span>Genghis Khan menciptakan jaringan pos tercepat di dunia sebelum era modern &nbsp;•&nbsp;</span>
+        <span>Sriwijaya menguasai Selat Malaka selama 700 tahun — pusat Buddha dan perdagangan dunia &nbsp;•&nbsp;</span>
+        <span>Perpustakaan Baghdad menyimpan lebih dari satu juta manuskrip sebelum dihancurkan Mongol 1258 M &nbsp;•&nbsp;</span>
+        <span>Perang Dunia I merenggut 20 juta nyawa — dan menanam benih Perang Dunia II &nbsp;•&nbsp;</span>
+        <span>Koresh Agung merilis "hak asasi manusia" pertama di dunia pada 539 SM &nbsp;•&nbsp;</span>
+        <span>D-Day 6 Juni 1944: 156.000 tentang Sekutu mendarat di Normandia dalam 24 jam &nbsp;•&nbsp;</span>
+        <span>Ibnu Sina menulis lebih dari 450 karya ilmiah — mendasari kedokteran Eropa selama 600 tahun &nbsp;•&nbsp;</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ STATS STRIP ══════════ -->
+  <div class="stats-strip stats-section">
+    <div class="container">
+      <div class="ss-item"><span class="ss-num" data-count="8">0</span><span class="ss-label">Peradaban Dikaji</span></div>
+      <div class="ss-item"><span class="ss-num" data-count="5000">0</span><span class="ss-label">Tahun Sejarah</span></div>
+      <div class="ss-item"><span class="ss-num" data-count="240">0</span><span class="ss-label">Artikel Ditulis</span></div>
+      <div class="ss-item"><span class="ss-num" data-count="12">0</span><span class="ss-label">Tahun Riset</span></div>
+    </div>
+  </div>
+
+  <!-- ══════════ PERADABAN BESAR ══════════ -->
+  <section id="peradaban">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Warisan Umat Manusia</div>
+        <h2 class="section-title">Peradaban-Peradaban Agung</h2>
+        <p class="section-desc">Dari Lembah Tigris hingga Nusantara — kisah bangsa-bangsa yang membentuk dunia kita hari ini.</p>
+        <div class="divider-ornament">✦ ✦ ✦</div>
+      </div>
+    </div>
+    <div class="peradaban-grid">
+
+      <!-- ROMAWI -->
+      <div class="perad-card reveal" data-anchor="artikel">
+        <img class="perad-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1280px-Colosseo_2020.jpg"
+          alt="Colosseum Roma"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#1a0f00,#3d2000);font-size:64px;align-items:center;justify-content:center">🏛️</div>
+        <div class="perad-overlay">
+          <div class="perad-era">Kekaisaran Kuno</div>
+          <div class="perad-badge">🏛️</div>
+          <div class="perad-name">Kekaisaran Roma</div>
+          <div class="perad-date">753 SM — 476 M</div>
+          <div class="perad-desc">Dari republik kecil menjadi kekaisaran yang mengatur separuh dunia. Hukum, arsitektur, dan bahasa Roma masih hidup dalam peradaban Barat modern.</div>
+        </div>
+      </div>
+
+      <!-- PERSIA -->
+      <div class="perad-card reveal reveal-d1" data-anchor="artikel">
+        <img class="perad-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Persepolis_Apadana_east_stairs.jpg/1280px-Persepolis_Apadana_east_stairs.jpg"
+          alt="Persepolis Persia"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#1a0800,#5c2800);font-size:64px;align-items:center;justify-content:center">🦁</div>
+        <div class="perad-overlay">
+          <div class="perad-era">Kekaisaran Kuno</div>
+          <div class="perad-badge">🦁</div>
+          <div class="perad-name">Kekaisaran Persia</div>
+          <div class="perad-date">550 SM — 651 M</div>
+          <div class="perad-desc">Koresh Agung menciptakan hak asasi manusia pertama. Persepolis, jalan kerajaan, dan sistem pos cepat: inovasi Persia mendahului zamannya.</div>
+        </div>
+      </div>
+
+      <!-- MONGOL -->
+      <div class="perad-card reveal reveal-d2" data-anchor="artikel">
+        <img class="perad-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Genghis_Khan_on_horse.jpg/800px-Genghis_Khan_on_horse.jpg"
+          alt="Genghis Khan"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#0a1a00,#1a3300);font-size:64px;align-items:center;justify-content:center">🐴</div>
+        <div class="perad-overlay">
+          <div class="perad-era">Kekaisaran Abad Pertengahan</div>
+          <div class="perad-badge">🐴</div>
+          <div class="perad-name">Kekaisaran Mongol</div>
+          <div class="perad-date">1206 M — 1368 M</div>
+          <div class="perad-desc">Kekaisaran darat terbesar sepanjang sejarah. Temujin menyatukan suku-suku stepa dan membuka jalur perdagangan dari Tiongkok ke Eropa.</div>
+        </div>
+      </div>
+
+      <!-- MASA KEEMASAN ISLAM -->
+      <div class="perad-card reveal" data-anchor="artikel">
+        <img class="perad-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Hagia_Sophia_Mars_2013.jpg/1280px-Hagia_Sophia_Mars_2013.jpg"
+          alt="Masa Keemasan Islam"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#0a1000,#1a2800);font-size:64px;align-items:center;justify-content:center">🕌</div>
+        <div class="perad-overlay">
+          <div class="perad-era">Zaman Keemasan</div>
+          <div class="perad-badge">🕌</div>
+          <div class="perad-name">Masa Keemasan Islam</div>
+          <div class="perad-date">750 M — 1258 M</div>
+          <div class="perad-desc">Baghdad menjadi ibu kota ilmu dunia. Al-Jabr, optik, astronomi, kedokteran — para ilmuwan Muslim menyelamatkan dan mengembangkan warisan Yunani.</div>
+        </div>
+      </div>
+
+      <!-- SRIWIJAYA -->
+      <div class="perad-card reveal reveal-d1" data-anchor="artikel">
+        <img class="perad-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Muaro_Jambi_Temple.jpg/1280px-Muaro_Jambi_Temple.jpg"
+          alt="Kerajaan Sriwijaya"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#001a0a,#00331a);font-size:64px;align-items:center;justify-content:center">⛵</div>
+        <div class="perad-overlay">
+          <div class="perad-era">Nusantara</div>
+          <div class="perad-badge">⛵</div>
+          <div class="perad-name">Kerajaan Sriwijaya</div>
+          <div class="perad-date">671 M — 1377 M</div>
+          <div class="perad-desc">Kerajaan maritim terbesar Asia Tenggara. Menguasai Selat Malaka, menjadi pusat pendidikan Buddha, dan menghubungkan perdagangan India–Tiongkok.</div>
+        </div>
+      </div>
+
+      <!-- WW2 NORMANDY -->
+      <div class="perad-card reveal reveal-d2" data-anchor="perang">
+        <img class="perad-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Into_the_Jaws_of_Death_23-0455M_edit.jpg"
+          alt="D-Day Normandy WW2"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#1a0000,#330000);font-size:64px;align-items:center;justify-content:center">⚔️</div>
+        <div class="perad-overlay">
+          <div class="perad-era">Perang Dunia</div>
+          <div class="perad-badge">⚔️</div>
+          <div class="perad-name">Perang Dunia II</div>
+          <div class="perad-date">1939 M — 1945 M</div>
+          <div class="perad-desc">Konflik terbesar dalam sejarah manusia. 70–85 juta jiwa melayang, Holocaust, bom atom, dan lahirnya tatanan dunia baru pasca-perang.</div>
+        </div>
+      </div>
+
+      <!-- OTTOMAN -->
+      <div class="perad-card reveal" data-anchor="artikel">
+        <img class="perad-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Topkapi_palace_dsc04786.jpg/1280px-Topkapi_palace_dsc04786.jpg"
+          alt="Kekaisaran Ottoman"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#0d0020,#1a0040);font-size:64px;align-items:center;justify-content:center">☪️</div>
+        <div class="perad-overlay">
+          <div class="perad-era">Kekaisaran Modern Awal</div>
+          <div class="perad-badge">☪️</div>
+          <div class="perad-name">Kekaisaran Ottoman</div>
+          <div class="perad-date">1299 M — 1922 M</div>
+          <div class="perad-desc">Selama 600 tahun menguasai tiga benua. Konstantinopel jatuh 1453 menandai akhir Abad Pertengahan dan membuka era baru Eropa.</div>
+        </div>
+      </div>
+
+      <!-- MAYA / AZTEC -->
+      <div class="perad-card reveal reveal-d1" data-anchor="artikel">
+        <img class="perad-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Chichen_Itza_3.jpg/1280px-Chichen_Itza_3.jpg"
+          alt="Peradaban Maya"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#001a10,#003320);font-size:64px;align-items:center;justify-content:center">🗿</div>
+        <div class="perad-overlay">
+          <div class="perad-era">Amerika Pra-Columbus</div>
+          <div class="perad-badge">🗿</div>
+          <div class="perad-name">Peradaban Maya</div>
+          <div class="perad-date">2000 SM — 1697 M</div>
+          <div class="perad-desc">Kalender Maya yang akurat, sistem penulisan kompleks, dan kota-kota megah di hutan hujan. Peradaban yang jauh mendahului penjelajah Eropa.</div>
+        </div>
+      </div>
+
+      <!-- TIONGKOK KUNO -->
+      <div class="perad-card reveal reveal-d2" data-anchor="artikel">
+        <img class="perad-img"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/20090529_great_wall_8185.jpg/1280px-20090529_great_wall_8185.jpg"
+          alt="Tembok Besar China"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="perad-img" style="display:none;background:linear-gradient(135deg,#0a0010,#1a0030);font-size:64px;align-items:center;justify-content:center">🐉</div>
+        <div class="perad-overlay">
+          <div class="perad-era">Kekaisaran Timur</div>
+          <div class="perad-badge">🐉</div>
+          <div class="perad-name">Tiongkok Kuno</div>
+          <div class="perad-date">2100 SM — 1912 M</div>
+          <div class="perad-desc">Kertas, kompas, mesiu, dan percetakan — empat penemuan yang mengubah sejarah dunia lahir di bumi Tiongkok ribuan tahun sebelum Barat memakainya.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════ PERANG DUNIA ══════════ -->
+  <section id="perang">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Konflik Terbesar Umat Manusia</div>
+        <h2 class="section-title">Perang Dunia I & II</h2>
+        <p class="section-desc">Dua konflik yang merenggut lebih dari 100 juta nyawa dan membentuk ulang tatanan politik dunia selamanya.</p>
+        <div class="divider-ornament">✦ ✦ ✦</div>
+      </div>
+
+      <div class="perang-layout">
+        <!-- WW1 -->
+        <div class="perang-side">
+          <div>
+            <div class="pw-header">Perang Dunia <span>I</span></div>
+            <div class="pw-period">1914 — 1918</div>
+          </div>
+
+          <img class="pw-photo reveal"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Cheshire_Regiment_trench_Somme_1916.jpg/1280px-Cheshire_Regiment_trench_Somme_1916.jpg"
+            alt="Parit WW1 Somme"
+            loading="lazy"
+            onerror="this.src='';this.style.background='#1a0a00';this.style.height='200px'">
+
+          <div class="pw-stats reveal reveal-d1">
+            <div class="pw-stat"><span class="pw-stat-num">20 Jt</span><span class="pw-stat-label">Korban Jiwa</span></div>
+            <div class="pw-stat"><span class="pw-stat-num">30 Jt</span><span class="pw-stat-label">Terluka</span></div>
+            <div class="pw-stat"><span class="pw-stat-num">4</span><span class="pw-stat-label">Kekaisaran Runtuh</span></div>
+            <div class="pw-stat"><span class="pw-stat-num">1918</span><span class="pw-stat-label">Gencatan Senjata</span></div>
+          </div>
+
+          <div class="pw-event reveal">
+            <span class="pw-event-year">1914</span>
+            <div class="pw-event-body">
+              <h5>Pembunuhan di Sarajevo</h5>
+              <p>Archduke Franz Ferdinand ditembak mati, memicu sistem aliansi yang menyeret Eropa ke jurang perang.</p>
+            </div>
+          </div>
+          <div class="pw-event reveal reveal-d1">
+            <span class="pw-event-year">1915</span>
+            <div class="pw-event-body">
+              <h5>Pertempuran Gallipoli</h5>
+              <p>Pasukan ANZAC dan Sekutu gagal merebut Selat Dardanella. 250.000 korban di kedua pihak.</p>
+            </div>
+          </div>
+          <div class="pw-event reveal reveal-d2">
+            <span class="pw-event-year">1916</span>
+            <div class="pw-event-body">
+              <h5>Pertempuran Somme</h5>
+              <p>Hari pertama: 57.470 tentara Inggris tewas atau terluka — hari tergelap dalam sejarah militer Inggris.</p>
+            </div>
+          </div>
+          <div class="pw-event reveal">
+            <span class="pw-event-year">1917</span>
+            <div class="pw-event-body">
+              <h5>Amerika Serikat Bergabung</h5>
+              <p>Telegram Zimmermann dan serangan kapal selam Jerman mendorong AS keluar dari isolasionisme.</p>
+            </div>
+          </div>
+          <div class="pw-event reveal reveal-d1">
+            <span class="pw-event-year">1919</span>
+            <div class="pw-event-body">
+              <h5>Perjanjian Versailles</h5>
+              <p>Jerman dihukum berat: kehilangan wilayah, membayar reparasi, dan menanggung "war guilt clause" — benih WW2.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="perang-divider"></div>
+
+        <!-- WW2 -->
+        <div class="perang-side ww2">
+          <div>
+            <div class="pw-header">Perang Dunia <span>II</span></div>
+            <div class="pw-period">1939 — 1945</div>
+          </div>
+
+          <img class="pw-photo reveal"
+            src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Into_the_Jaws_of_Death_23-0455M_edit.jpg"
+            alt="D-Day Normandy"
+            loading="lazy"
+            onerror="this.src='';this.style.background='#1a0000';this.style.height='200px'">
+
+          <div class="pw-stats reveal reveal-d1">
+            <div class="pw-stat"><span class="pw-stat-num">70-85 Jt</span><span class="pw-stat-label">Korban Jiwa</span></div>
+            <div class="pw-stat"><span class="pw-stat-num">6 Jt</span><span class="pw-stat-label">Korban Holocaust</span></div>
+            <div class="pw-stat"><span class="pw-stat-num">30</span><span class="pw-stat-label">Negara Terlibat</span></div>
+            <div class="pw-stat"><span class="pw-stat-num">1945</span><span class="pw-stat-label">Akhir Perang</span></div>
+          </div>
+
+          <div class="pw-event reveal">
+            <span class="pw-event-year">1939</span>
+            <div class="pw-event-body">
+              <h5>Invasi Polandia</h5>
+              <p>Jerman Nazi menyerang Polandia 1 September 1939. Dua hari kemudian Inggris dan Prancis menyatakan perang.</p>
+            </div>
+          </div>
+          <div class="pw-event reveal reveal-d1">
+            <span class="pw-event-year">1941</span>
+            <div class="pw-event-body">
+              <h5>Pearl Harbor & Operasi Barbarossa</h5>
+              <p>Jepang membombardir pangkalan AS; Hitler mengkhianati pakta dengan Stalin. Perang menjadi benar-benar global.</p>
+            </div>
+          </div>
+          <div class="pw-event reveal reveal-d2">
+            <span class="pw-event-year">1943</span>
+            <div class="pw-event-body">
+              <h5>Stalingrad: Titik Balik</h5>
+              <p>Kekalahan Jerman di Stalingrad — pertempuran paling mematikan dalam sejarah — membalik momentum perang.</p>
+            </div>
+          </div>
+          <div class="pw-event reveal">
+            <span class="pw-event-year">1944</span>
+            <div class="pw-event-body">
+              <h5>D-Day: Operation Overlord</h5>
+              <p>6 Juni: 156.000 pasukan Sekutu mendarat di 5 pantai Normandia. Awal akhir rezim Nazi di Eropa.</p>
+            </div>
+          </div>
+          <div class="pw-event reveal reveal-d1">
+            <span class="pw-event-year">1945</span>
+            <div class="pw-event-body">
+              <h5>Hiroshima, Nagasaki & Akhir Perang</h5>
+              <p>Bom atom mengakhiri Pacific War. PBB lahir dari puing-puing untuk mencegah tragedi serupa terulang.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ KUTIPAN ══════════ -->
+  <section id="kutipan">
+    <div class="container">
+      <p class="kutipan-text" id="quoteText">Barangsiapa tidak belajar dari sejarah, ia dikutuk untuk mengulanginya.</p>
+      <p class="kutipan-source" id="quoteSource">— George Santayana</p>
+      <div class="kutipan-nav">
+        <button class="kq-btn" id="qPrev">←</button>
+        <button class="kq-btn" id="qNext">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ ARTIKEL SEJARAH ══════════ -->
+  <section id="artikel">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Tulisan & Riset</div>
+        <h2 class="section-title">Artikel Sejarah</h2>
+        <p class="section-desc">Kajian mendalam tentang peristiwa, tokoh, dan pelajaran yang membentuk peradaban manusia.</p>
+        <div class="divider-ornament">✦ ✦ ✦</div>
+      </div>
+      <div class="artikel-filter reveal">
+        <button class="afil-btn active" data-filter="all">Semua</button>
+        <button class="afil-btn" data-filter="romawi">Roma</button>
+        <button class="afil-btn" data-filter="persia">Persia</button>
+        <button class="afil-btn" data-filter="mongol">Mongol</button>
+        <button class="afil-btn" data-filter="islam">Islam</button>
+        <button class="afil-btn" data-filter="sriwijaya">Sriwijaya</button>
+        <button class="afil-btn" data-filter="ww1">WW1</button>
+        <button class="afil-btn" data-filter="ww2">WW2</button>
+        <button class="afil-btn" data-filter="lain">Lainnya</button>
+      </div>
+
+      <div class="artikel-grid" id="artikelGrid">
+
+        <!-- FEATURED -->
+        <div class="art-card featured reveal" data-era="ww2">
+          <div class="art-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Into_the_Jaws_of_Death_23-0455M_edit.jpg" alt="D-Day" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
+            <div class="art-img-ph" style="display:none;height:100%;min-height:300px">⚔️</div>
+            <span class="art-tag">WW2</span>
+            <span class="art-hot">🔥 Unggulan</span>
+          </div>
+          <div class="art-body">
+            <div class="art-meta">6 Jun 1944 · 15 mnt baca</div>
+            <h3>D-Day: Satu Hari yang Mengubah Nasib Eropa dan Dunia Selamanya</h3>
+            <p>Operation Overlord bukan sekadar pendaratan militer — ini adalah perjudian terbesar sejarah modern. Eisenhower, cuaca buruk, 156.000 prajurit, dan lima pantai yang menjadi monumen kebebasan manusia.</p>
+            <a href="#" class="art-read">Baca Analisis Penuh →</a>
+          </div>
+        </div>
+
+        <div class="art-card reveal reveal-d1" data-era="romawi">
+          <div class="art-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/800px-Colosseo_2020.jpg" alt="Colosseum" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
+            <div class="art-img-ph" style="display:none">🏛️</div>
+            <span class="art-tag">Roma</span>
+          </div>
+          <div class="art-body">
+            <div class="art-meta">Roma · 9 mnt</div>
+            <h3>Mengapa Roma Runtuh? 10 Faktor yang Menghancurkan Imperium Terbesar</h3>
+            <p>Korupsi, migrasi, inflasi, dan krisis kepemimpinan — kejatuhan Roma adalah cermin yang menakutkan bagi peradaban modern.</p>
+            <a href="#" class="art-read">Baca →</a>
+          </div>
+        </div>
+
+        <div class="art-card reveal reveal-d2" data-era="mongol">
+          <div class="art-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Genghis_Khan_on_horse.jpg/600px-Genghis_Khan_on_horse.jpg" alt="Genghis Khan" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
+            <div class="art-img-ph" style="display:none">🐴</div>
+            <span class="art-tag">Mongol</span>
+          </div>
+          <div class="art-body">
+            <div class="art-meta">1206 M · 11 mnt</div>
+            <h3>Genghis Khan: Penakluk atau Modernisator? Warisan yang Kontroversial</h3>
+            <p>Ia membantai jutaan orang, namun juga membuka kebebasan beragama dan jalur perdagangan global terbesar sebelum era modern.</p>
+            <a href="#" class="art-read">Baca →</a>
+          </div>
+        </div>
+
+        <div class="art-card reveal" data-era="islam">
+          <div class="art-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Mir-i-Arab_Madrasah_Bukhara.jpg/800px-Mir-i-Arab_Madrasah_Bukhara.jpg" alt="Arsitektur Islam" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
+            <div class="art-img-ph" style="display:none">🕌</div>
+            <span class="art-tag">Islam</span>
+          </div>
+          <div class="art-body">
+            <div class="art-meta">Baghdad, 800 M · 10 mnt</div>
+            <h3>Bayt al-Hikmah: Ketika Baghdad Menjadi Ibu Kota Ilmu Pengetahuan Dunia</h3>
+            <p>Selama lima abad, para ilmuwan Muslim menerjemahkan, memperluas, dan melampaui warisan intelektual Yunani, Persia, dan India.</p>
+            <a href="#" class="art-read">Baca →</a>
+          </div>
+        </div>
+
+        <div class="art-card reveal reveal-d1" data-era="sriwijaya">
+          <div class="art-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Muaro_Jambi_Temple.jpg/800px-Muaro_Jambi_Temple.jpg" alt="Sriwijaya" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
+            <div class="art-img-ph" style="display:none">⛵</div>
+            <span class="art-tag">Sriwijaya</span>
+          </div>
+          <div class="art-body">
+            <div class="art-meta">Nusantara · 8 mnt</div>
+            <h3>Sriwijaya: Kerajaan Maritim yang Menguasai Dunia dari Palembang</h3>
+            <p>700 tahun mengendalikan Selat Malaka — arteri perdagangan terpenting dunia. Bagaimana kerajaan ini bisa hilang dari ingatan kita?</p>
+            <a href="#" class="art-read">Baca →</a>
+          </div>
+        </div>
+
+        <div class="art-card reveal reveal-d2" data-era="persia">
+          <div class="art-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Persepolis_Apadana_east_stairs.jpg/800px-Persepolis_Apadana_east_stairs.jpg" alt="Persepolis" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
+            <div class="art-img-ph" style="display:none">🦁</div>
+            <span class="art-tag">Persia</span>
+          </div>
+          <div class="art-body">
+            <div class="art-meta">Persepolis · 9 mnt</div>
+            <h3>Koresh Agung dan Silinder Hak Asasi Manusia Pertama di Dunia</h3>
+            <p>Pada 539 SM, Koresh membebaskan budak dan menjamin kebebasan beragama. Ini bukan mitos — silinder tanah liatnya ada di Museum Inggris.</p>
+            <a href="#" class="art-read">Baca →</a>
+          </div>
+        </div>
+
+        <div class="art-card reveal" data-era="ww1">
+          <div class="art-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Cheshire_Regiment_trench_Somme_1916.jpg/800px-Cheshire_Regiment_trench_Somme_1916.jpg" alt="WW1 Trench" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
+            <div class="art-img-ph" style="display:none">🪖</div>
+            <span class="art-tag">WW1</span>
+          </div>
+          <div class="art-body">
+            <div class="art-meta">1916 M · 12 mnt</div>
+            <h3>Kehidupan di Parit: Trauma Perang yang Melahirkan Sastra Modernisme</h3>
+            <p>Lumpur, gas mustard, dan kematian tanpa arti. Para penyair seperti Wilfred Owen mengubah pengalaman neraka menjadi literatur abadi.</p>
+            <a href="#" class="art-read">Baca →</a>
+          </div>
+        </div>
+
+        <div class="art-card reveal reveal-d1" data-era="lain">
+          <div class="art-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Chichen_Itza_3.jpg/800px-Chichen_Itza_3.jpg" alt="Maya Chichen Itza" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
+            <div class="art-img-ph" style="display:none">🗿</div>
+            <span class="art-tag">Maya</span>
+          </div>
+          <div class="art-body">
+            <div class="art-meta">2000 SM — 900 M · 10 mnt</div>
+            <h3>Misteri Runtuhnya Peradaban Maya Klasik: Kekeringan, Perang, atau Sesuatu yang Lain?</h3>
+            <p>Dalam satu abad, kota-kota megah Maya ditinggalkan. Arkeologi modern mulai mengungkap jawaban yang lebih kompleks dari dugaan semula.</p>
+            <a href="#" class="art-read">Baca →</a>
+          </div>
+        </div>
+
+        <div class="art-card reveal reveal-d2" data-era="lain">
+          <div class="art-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/20090529_great_wall_8185.jpg/800px-20090529_great_wall_8185.jpg" alt="Great Wall" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
+            <div class="art-img-ph" style="display:none">🐉</div>
+            <span class="art-tag">Tiongkok</span>
+          </div>
+          <div class="art-body">
+            <div class="art-meta">Dinasti Qin · 8 mnt</div>
+            <h3>Tembok Besar China: Monumen Ketakutan atau Keajaiban Rekayasa?</h3>
+            <p>Dibangun selama 2.000 tahun oleh jutaan pekerja paksa — tembok ini tidak pernah benar-benar menghentikan invasi, tapi mengajarkan banyak tentang ambisi manusia.</p>
+            <a href="#" class="art-read">Baca →</a>
+          </div>
+        </div>
+
+        <div class="art-card reveal" data-era="ww2">
+          <div class="art-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Bundesarchiv_Bild_101I-218-0504-36%2C_Russland-Mitte%2C_Soldat_mit_Panzerfaust.jpg/644px-Bundesarchiv_Bild_101I-218-0504-36%2C_Russland-Mitte%2C_Soldat_mit_Panzerfaust.jpg" alt="WW2 Eastern Front" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
+            <div class="art-img-ph" style="display:none">⭐</div>
+            <span class="art-tag">WW2</span>
+          </div>
+          <div class="art-body">
+            <div class="art-meta">1942–1943 · 14 mnt</div>
+            <h3>Pertempuran Stalingrad: 200 Hari di Kota yang Tidak Boleh Jatuh</h3>
+            <p>Hitler vs Stalin — dua diktator yang menggunakan kota sebagai simbol ego mereka. 2 juta korban dalam satu pertempuran yang menentukan nasib Perang Dunia II.</p>
+            <a href="#" class="art-read">Baca →</a>
+          </div>
+        </div>
+
+        <div class="art-card reveal reveal-d1" data-era="islam">
+          <div class="art-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Topkapi_palace_dsc04786.jpg/800px-Topkapi_palace_dsc04786.jpg" alt="Ottoman" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
+            <div class="art-img-ph" style="display:none">☪️</div>
+            <span class="art-tag">Ottoman</span>
+          </div>
+          <div class="art-body">
+            <div class="art-meta">1453 M · 11 mnt</div>
+            <h3>Jatuhnya Konstantinopel: Akhir Abad Pertengahan, Awal Dunia Modern</h3>
+            <p>Ketika meriam raksasa Mehmed II meruntuhkan tembok yang bertahan 1.000 tahun, bukan hanya sebuah kota yang jatuh — sebuah era berakhir.</p>
+            <a href="#" class="art-read">Baca →</a>
+          </div>
+        </div>
+
+        <div class="art-card reveal reveal-d2" data-era="romawi">
+          <div class="art-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/GaiusJuliusCaesar.jpg/600px-GaiusJuliusCaesar.jpg" alt="Julius Caesar" loading="lazy" onerror="this.parentElement.querySelector('.art-img-ph').style.display='flex';this.style.display='none'">
+            <div class="art-img-ph" style="display:none">🏛️</div>
+            <span class="art-tag">Roma</span>
+          </div>
+          <div class="art-body">
+            <div class="art-meta">44 SM · 9 mnt</div>
+            <h3>Julius Caesar: Genius Militer yang Membunuh Republik dengan Caranya Sendiri</h3>
+            <p>Veni, Vidi, Vici — tiga kata yang merangkum kepercayaan diri seorang pria yang mengubah Roma dari republik menjadi kekaisaran untuk selamanya.</p>
+            <a href="#" class="art-read">Baca →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;margin-top:40px;" class="reveal">
+        <button class="btn-ghost" id="loadMoreBtn" style="font-family:'Spectral SC',serif;font-size:12px;letter-spacing:2px;padding:14px 32px;cursor:pointer;transition:all 0.3s;">
+          Muat Lebih Banyak Arsip ↓
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ TOKOH SEJARAH ══════════ -->
+  <section id="tokoh">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Para Pembentuk Dunia</div>
+        <h2 class="section-title">Tokoh-Tokoh Bersejarah</h2>
+        <p class="section-desc">Manusia-manusia yang dengan keputusan, kecerdasan, atau keberanian mereka mengubah jalannya peradaban.</p>
+        <div class="divider-ornament">✦ ✦ ✦</div>
+      </div>
+      <div class="tokoh-grid">
+        <div class="tokoh-card reveal"><div class="tokoh-avatar">🏛️</div><div class="tokoh-name">Julius Caesar</div><div class="tokoh-role">Romawi, 100–44 SM</div><div class="tokoh-desc">Jenderal sekaligus negarawan yang mengubah Republik Roma menjadi Kekaisaran. Pembunuhannya memicu perang saudara yang melahirkan Augustus.</div></div>
+        <div class="tokoh-card reveal reveal-d1"><div class="tokoh-avatar">🐴</div><div class="tokoh-name">Genghis Khan</div><div class="tokoh-role">Mongol, 1162–1227 M</div><div class="tokoh-desc">Dari yatim piatu di stepa Mongolia menjadi penguasa kekaisaran terluas. Ia membuka jalur perdagangan dan komunikasi antar benua pertama.</div></div>
+        <div class="tokoh-card reveal reveal-d2"><div class="tokoh-avatar">🦁</div><div class="tokoh-name">Koresh Agung</div><div class="tokoh-role">Persia, 600–530 SM</div><div class="tokoh-desc">Pendiri Kekaisaran Akhemeniyah. Pencipta dekrit hak asasi manusia pertama — membebaskan budak Babilonia dan menjamin kebebasan beragama.</div></div>
+        <div class="tokoh-card reveal reveal-d3"><div class="tokoh-avatar">🕌</div><div class="tokoh-name">Ibnu Sina</div><div class="tokoh-role">Persia-Islam, 980–1037 M</div><div class="tokoh-desc">Ilmuwan dan filsuf terbesar Abad Pertengahan. Karyanya Al-Qanun fi al-Tibb menjadi buku teks kedokteran Eropa selama 600 tahun.</div></div>
+        <div class="tokoh-card reveal"><div class="tokoh-avatar">⛵</div><div class="tokoh-name">Balaputradewa</div><div class="tokoh-role">Sriwijaya, 860–895 M</div><div class="tokoh-desc">Raja Sriwijaya yang membawa kerajaan maritim ini ke puncak kejayaan — menguasai rute perdagangan dari India hingga Tiongkok.</div></div>
+        <div class="tokoh-card reveal reveal-d1"><div class="tokoh-avatar">🌙</div><div class="tokoh-name">Harun al-Rasyid</div><div class="tokoh-role">Abbasiyah, 763–809 M</div><div class="tokoh-desc">Khalifah yang menjadikan Baghdad kota paling maju di dunia. Di bawahnya, Bayt al-Hikmah berkembang menjadi pusat pengetahuan global.</div></div>
+        <div class="tokoh-card reveal reveal-d2"><div class="tokoh-avatar">🎖️</div><div class="tokoh-name">Winston Churchill</div><div class="tokoh-role">Inggris, 1874–1965 M</div><div class="tokoh-desc">"Kami tidak akan pernah menyerah." Kepemimpinannya di masa terdekap Nazi mungkin merupakan momen kepemimpinan terpenting abad ke-20.</div></div>
+        <div class="tokoh-card reveal reveal-d3"><div class="tokoh-avatar">⭐</div><div class="tokoh-name">Georgy Zhukov</div><div class="tokoh-role">Soviet, 1896–1974 M</div><div class="tokoh-desc">Komandan Soviet yang tidak pernah kalah dalam pertempuran besar. Perancang kemenangan Stalingrad dan penakluk Berlin 1945.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ DEBAT SEJARAH ══════════ -->
+  <section id="debat">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Kontroversi Sejarah</div>
+        <h2 class="section-title">Debat Para Sejarawan</h2>
+        <p class="section-desc">Pertanyaan-pertanyaan besar sejarah yang masih diperdebatkan — dua perspektif, satu analisis.</p>
+        <div class="divider-ornament" style="color:rgba(201,151,58,0.4)">✦ ✦ ✦</div>
+      </div>
+      <div class="debat-grid">
+        <div class="debat-card reveal">
+          <div class="debat-topik">🤔 Apakah Bom Atom Hiroshima Bisa Dibenarkan?</div>
+          <div class="debat-sides">
+            <div class="debat-pro"><div class="debat-side-label pro">PRO BOM ATOM</div><p>Invasi darat Jepang diperkirakan menelan 500.000–1 juta korban Sekutu dan jutaan warga Jepang. Bom atom, meski mengerikan, memperpendek perang dan menyelamatkan lebih banyak nyawa secara keseluruhan.</p></div>
+            <div class="debat-vs">VS</div>
+            <div class="debat-con"><div class="debat-side-label con">KONTRA BOM ATOM</div><p>Jepang sudah dalam posisi hampir kalah sebelum bom dijatuhkan. Pengeboman sipil tanpa peringatan adalah kejahatan perang. Tujuan sebenarnya adalah menakuti Soviet, bukan mengalahkan Jepang.</p></div>
+          </div>
+          <div class="debat-verdict"><span class="verdict-label">Analisis DELY:</span><p>Debat ini mencerminkan dilema moral perang yang tak terpecahkan. Data menunjukkan Jepang mempertimbangkan menyerah bahkan sebelum bom — tapi entah kapan. Konteks Perang Dingin yang mulai berkembang juga tidak bisa diabaikan.</p></div>
+        </div>
+        <div class="debat-card reveal reveal-d1">
+          <div class="debat-topik">🏛️ Apakah Roma Runtuh karena Faktor Internal atau Eksternal?</div>
+          <div class="debat-sides">
+            <div class="debat-pro"><div class="debat-side-label pro">FAKTOR INTERNAL</div><p>Edward Gibbon berpendapat kemunduran moral, Kristenisasi, korupsi politik, dan inflasi ekonomi adalah penyebab utama. Roma menghancurkan dirinya sendiri dari dalam.</p></div>
+            <div class="debat-vs">VS</div>
+            <div class="debat-con"><div class="debat-side-label con">FAKTOR EKSTERNAL</div><p>Tekanan invasi Hunnic yang mendorong gelombang migrasi barbar, wabah penyakit besar, dan perubahan iklim kecil adalah penyebab utama. Roma adalah korban kekuatan luar.</p></div>
+          </div>
+          <div class="debat-verdict"><span class="verdict-label">Analisis DELY:</span><p>Sejarawan modern umumnya setuju: kombinasi keduanya. Yang menarik adalah Roma tidak runtuh tiba-tiba — prosesnya berlangsung 300 tahun. "Kejatuhan" Roma lebih merupakan transformasi bertahap daripada keruntuhan mendadak.</p></div>
+        </div>
+        <div class="debat-card reveal">
+          <div class="debat-topik">🌊 Apakah Mongol Penghancur atau Pembawa Kemajuan?</div>
+          <div class="debat-sides">
+            <div class="debat-pro"><div class="debat-side-label pro">PENGHANCUR PERADABAN</div><p>Penghancuran Baghdad 1258, pembantaian jutaan orang di Persia dan Tiongkok, dan pembakaran perpustakaan — Mongol menghapus berabad-abad kemajuan peradaban dalam hitungan tahun.</p></div>
+            <div class="debat-vs">VS</div>
+            <div class="debat-con"><div class="debat-side-label con">PEMBUKA JALAN DUNIA</div><p>Pax Mongolica menciptakan keamanan jalur sutra pertama. Teknologi, agama, dan wabah penyakit menyebar lintas benua. Columbus mungkin tidak pernah berlayar tanpa peta yang dihasilkan dari era Mongol.</p></div>
+          </div>
+          <div class="debat-verdict"><span class="verdict-label">Analisis DELY:</span><p>Paradoks Mongol adalah yang paling menakjubkan dalam sejarah: penakluk paling destruktif sekaligus pemersatu terbesar peradaban Eurasia. Keduanya benar — dan tidak saling meniadakan.</p></div>
+        </div>
+        <div class="debat-card reveal reveal-d1">
+          <div class="debat-topik">⚗️ Seberapa Besar Kontribusi Ilmuwan Islam terhadap Sains Modern?</div>
+          <div class="debat-sides">
+            <div class="debat-pro"><div class="debat-side-label pro">KONTRIBUSI FUNDAMENTAL</div><p>Aljabar (Al-Jabr), optik (Ibnu al-Haytham), algoritma (Al-Khawarizmi), sistem angka desimal — tanpa masa keemasan Islam, Renaisans Eropa mungkin tidak pernah terjadi.</p></div>
+            <div class="debat-vs">VS</div>
+            <div class="debat-con"><div class="debat-side-label con">SEKADAR PENERJEMAH</div><p>Sebagian sejarawan berpendapat ilmuwan Muslim lebih berjasa menerjemahkan dan melestarikan ilmu Yunani daripada menciptakan yang benar-benar baru. Originalitasnya terbatas.</p></div>
+          </div>
+          <div class="debat-verdict"><span class="verdict-label">Analisis DELY:</span><p>Pandangan "sekadar penerjemah" adalah kesalahan besar. Ibnu al-Haytham menemukan teori optik yang sepenuhnya baru. Al-Khawarizmi menciptakan algoritma, bukan menerjemahkan. Mereka adalah ilmuwan besar, bukan sekadar pustakawan.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ GALERI FOTO SEJARAH ══════════ -->
+  <section id="galeri" style="background:#060402;padding:80px 0;">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Arsip Visual</div>
+        <h2 class="section-title">Galeri Foto Sejarah</h2>
+        <p class="section-desc">Potret peradaban yang telah mengubah dunia — dari reruntuhan agung hingga momen-momen yang menggetarkan sejarah.</p>
+        <div class="divider-ornament">✦ ✦ ✦</div>
+      </div>
+    </div>
+
+    <!-- MASONRY GALLERY GRID -->
+    <div class="galeri-grid">
+
+      <!-- ROMAWI - Roman Forum -->
+      <div class="galeri-item tall reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Roman_Forum_-_Before_Imperial_Fora.jpg/800px-Roman_Forum_-_Before_Imperial_Fora.jpg"
+          alt="Forum Romawi" loading="lazy"
+          onerror="this.parentElement.querySelector('.galeri-ph').style.display='flex';this.style.display='none'">
+        <div class="galeri-ph" style="display:none;background:linear-gradient(135deg,#1a0f00,#3d2000);">🏛️</div>
+        <div class="galeri-caption">
+          <span class="galeri-era">Roma Kuno</span>
+          <h4>Forum Romanum, Roma</h4>
+          <p>Jantung politik Republik Roma — tempat Caesar berpidato dan senat bersidang selama berabad-abad.</p>
+        </div>
+      </div>
+
+      <!-- WW2 - Normandy -->
+      <div class="galeri-item reveal reveal-d1">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Into_the_Jaws_of_Death_23-0455M_edit.jpg"
+          alt="D-Day Normandy" loading="lazy"
+          onerror="this.parentElement.querySelector('.galeri-ph').style.display='flex';this.style.display='none'">
+        <div class="galeri-ph" style="display:none;background:linear-gradient(135deg,#1a0000,#330000);">⚔️</div>
+        <div class="galeri-caption">
+          <span class="galeri-era">Perang Dunia II</span>
+          <h4>D-Day, Pantai Normandy — 6 Juni 1944</h4>
+          <p>156.000 tentara Sekutu mendarat di lima pantai Prancis dalam operasi amfibi terbesar sejarah.</p>
+        </div>
+      </div>
+
+      <!-- PERSIA - Persepolis -->
+      <div class="galeri-item reveal reveal-d2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Persepolis_Apadana_east_stairs.jpg/800px-Persepolis_Apadana_east_stairs.jpg"
+          alt="Persepolis" loading="lazy"
+          onerror="this.parentElement.querySelector('.galeri-ph').style.display='flex';this.style.display='none'">
+        <div class="galeri-ph" style="display:none;background:linear-gradient(135deg,#1a0800,#5c2800);">🦁</div>
+        <div class="galeri-caption">
+          <span class="galeri-era">Kekaisaran Persia</span>
+          <h4>Tangga Apadana, Persepolis</h4>
+          <p>Relief berusia 2.500 tahun menggambarkan delegasi dari 23 bangsa membawa upeti kepada Raja Darius.</p>
+        </div>
+      </div>
+
+      <!-- WW1 - Trenches -->
+      <div class="galeri-item reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Cheshire_Regiment_trench_Somme_1916.jpg/800px-Cheshire_Regiment_trench_Somme_1916.jpg"
+          alt="Parit Somme WW1" loading="lazy"
+          onerror="this.parentElement.querySelector('.galeri-ph').style.display='flex';this.style.display='none'">
+        <div class="galeri-ph" style="display:none;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);">🪖</div>
+        <div class="galeri-caption">
+          <span class="galeri-era">Perang Dunia I</span>
+          <h4>Parit Pertempuran Somme, 1916</h4>
+          <p>Kehidupan di bawah tanah selama berminggu-minggu. Pertempuran Somme menewaskan 1 juta prajurit.</p>
+        </div>
+      </div>
+
+      <!-- COLOSSEUM -->
+      <div class="galeri-item tall reveal reveal-d1">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/800px-Colosseo_2020.jpg"
+          alt="Colosseum Roma" loading="lazy"
+          onerror="this.parentElement.querySelector('.galeri-ph').style.display='flex';this.style.display='none'">
+        <div class="galeri-ph" style="display:none;background:linear-gradient(135deg,#1a0f00,#3d2000);">🏟️</div>
+        <div class="galeri-caption">
+          <span class="galeri-era">Roma Kuno</span>
+          <h4>Colosseum, Roma</h4>
+          <p>Dibangun antara 70–80 M, mampu menampung 50.000–80.000 penonton. Simbol terbesar kekuatan arsitektur Roma.</p>
+        </div>
+      </div>
+
+      <!-- MONGOL painting -->
+      <div class="galeri-item reveal reveal-d2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Genghis_Khan_on_horse.jpg/600px-Genghis_Khan_on_horse.jpg"
+          alt="Genghis Khan lukisan" loading="lazy"
+          onerror="this.parentElement.querySelector('.galeri-ph').style.display='flex';this.style.display='none'">
+        <div class="galeri-ph" style="display:none;background:linear-gradient(135deg,#0a1a00,#1a3300);">🐴</div>
+        <div class="galeri-caption">
+          <span class="galeri-era">Kekaisaran Mongol</span>
+          <h4>Temujin — Genghis Khan</h4>
+          <p>Lukisan abad ke-14 menggambarkan pendiri kekaisaran terbesar yang pernah ada di muka bumi.</p>
+        </div>
+      </div>
+
+      <!-- HAGIA SOPHIA / Islam -->
+      <div class="galeri-item reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Hagia_Sophia_Mars_2013.jpg/800px-Hagia_Sophia_Mars_2013.jpg"
+          alt="Hagia Sophia Istanbul" loading="lazy"
+          onerror="this.parentElement.querySelector('.galeri-ph').style.display='flex';this.style.display='none'">
+        <div class="galeri-ph" style="display:none;background:linear-gradient(135deg,#0a1000,#1a2800);">🕌</div>
+        <div class="galeri-caption">
+          <span class="galeri-era">Ottoman / Byzantium</span>
+          <h4>Hagia Sophia, Istanbul</h4>
+          <p>Dibangun 537 M sebagai gereja Kristen, lalu masjid Ottoman, kini museum. Simbol lintas peradaban.</p>
+        </div>
+      </div>
+
+      <!-- SRIWIJAYA -->
+      <div class="galeri-item reveal reveal-d1">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Muaro_Jambi_Temple.jpg/800px-Muaro_Jambi_Temple.jpg"
+          alt="Candi Muaro Jambi Sriwijaya" loading="lazy"
+          onerror="this.parentElement.querySelector('.galeri-ph').style.display='flex';this.style.display='none'">
+        <div class="galeri-ph" style="display:none;background:linear-gradient(135deg,#001a0a,#00331a);">⛵</div>
+        <div class="galeri-caption">
+          <span class="galeri-era">Kerajaan Sriwijaya</span>
+          <h4>Candi Muaro Jambi, Sumatra</h4>
+          <p>Kompleks candi Buddha terbesar di Asia Tenggara — bekas pusat pendidikan agama kerajaan Sriwijaya.</p>
+        </div>
+      </div>
+
+      <!-- GREAT WALL -->
+      <div class="galeri-item reveal reveal-d2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/20090529_great_wall_8185.jpg/800px-20090529_great_wall_8185.jpg"
+          alt="Tembok Besar China" loading="lazy"
+          onerror="this.parentElement.querySelector('.galeri-ph').style.display='flex';this.style.display='none'">
+        <div class="galeri-ph" style="display:none;background:linear-gradient(135deg,#0a0010,#1a0030);">🐉</div>
+        <div class="galeri-caption">
+          <span class="galeri-era">Tiongkok Kuno</span>
+          <h4>Tembok Besar China</h4>
+          <p>Dibangun selama 2.000 tahun, memanjang lebih dari 21.000 km — satu-satunya karya manusia yang legendaris.</p>
+        </div>
+      </div>
+
+      <!-- CHICHEN ITZA -->
+      <div class="galeri-item reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Chichen_Itza_3.jpg/800px-Chichen_Itza_3.jpg"
+          alt="Chichen Itza Maya" loading="lazy"
+          onerror="this.parentElement.querySelector('.galeri-ph').style.display='flex';this.style.display='none'">
+        <div class="galeri-ph" style="display:none;background:linear-gradient(135deg,#001a10,#003320);">🗿</div>
+        <div class="galeri-caption">
+          <span class="galeri-era">Peradaban Maya</span>
+          <h4>El Castillo, Chichen Itza</h4>
+          <p>Piramida Maya yang dibangun sebagai kalender arsitektur — 365 anak tangga setara hari dalam setahun.</p>
+        </div>
+      </div>
+
+      <!-- TOPKAPI - Ottoman -->
+      <div class="galeri-item tall reveal reveal-d1">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Topkapi_palace_dsc04786.jpg/800px-Topkapi_palace_dsc04786.jpg"
+          alt="Istana Topkapi Ottoman" loading="lazy"
+          onerror="this.parentElement.querySelector('.galeri-ph').style.display='flex';this.style.display='none'">
+        <div class="galeri-ph" style="display:none;background:linear-gradient(135deg,#0d0020,#1a0040);">☪️</div>
+        <div class="galeri-caption">
+          <span class="galeri-era">Kekaisaran Ottoman</span>
+          <h4>Istana Topkapi, Istanbul</h4>
+          <p>Pusat kekuasaan Ottoman selama 400 tahun — tempat sultan-sultan besar mengatur tiga benua.</p>
+        </div>
+      </div>
+
+      <!-- WW2 STALINGRAD area / Ruins -->
+      <div class="galeri-item reveal reveal-d2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Bundesarchiv_Bild_101I-218-0504-36%2C_Russland-Mitte%2C_Soldat_mit_Panzerfaust.jpg/600px-Bundesarchiv_Bild_101I-218-0504-36%2C_Russland-Mitte%2C_Soldat_mit_Panzerfaust.jpg"
+          alt="Front Timur WW2" loading="lazy"
+          onerror="this.parentElement.querySelector('.galeri-ph').style.display='flex';this.style.display='none'">
+        <div class="galeri-ph" style="display:none;background:linear-gradient(135deg,#1a0000,#330000);">🎖️</div>
+        <div class="galeri-caption">
+          <span class="galeri-era">Perang Dunia II</span>
+          <h4>Front Timur — Rusia, 1942</h4>
+          <p>Operasi Barbarossa membawa pasukan Jerman jauh ke dalam wilayah Soviet sebelum pembalikan tragis di Stalingrad.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════ CUACA & GRAFIK ══════════ -->
+  <section id="cuaca" style="background:var(--night);padding:80px 0;">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Semarang, Jawa Tengah</div>
+        <h2 class="section-title">Cuaca Real-Time</h2>
+        <p class="section-desc">Data cuaca terkini kota tempat saya menulis dan meneliti sejarah dunia.</p>
+        <div class="divider-ornament">✦ ✦ ✦</div>
+      </div>
+      <div class="cuaca-wrap">
+        <div>
+          <div id="weatherWidget"><div class="ww-main"><div style="text-align:center;padding:24px;color:rgba(244,237,216,0.3);font-family:'Spectral SC',serif;font-size:12px;letter-spacing:2px;">⏳ MEMUAT CUACA...</div></div></div>
+          <div style="background:rgba(201,151,58,0.04);border:1px solid rgba(201,151,58,0.15);padding:16px 20px 20px;margin-top:4px;">
+            <div class="weather-chart-label" style="font-family:'Spectral SC',serif;color:rgba(201,151,58,0.5);font-size:10px;letter-spacing:2px;margin-bottom:10px;">PRAKIRAAN SUHU & HUJAN 12 JAM</div>
+            <canvas id="weatherChartCanvas" width="300" height="110"></canvas>
+          </div>
+        </div>
+        <div>
+          <div class="section-tag" style="display:block;margin-bottom:20px;">Statistik Artikel</div>
+          <div style="background:rgba(201,151,58,0.03);border:1px solid rgba(201,151,58,0.12);padding:24px;margin-bottom:16px;">
+            <h4 style="font-family:'Cinzel',serif;font-size:15px;color:var(--parchment);margin-bottom:4px;">Distribusi per Era</h4>
+            <p style="font-size:11px;font-family:'Spectral SC',serif;color:rgba(244,237,216,0.3);letter-spacing:1px;margin-bottom:16px;">TOTAL 240 ARTIKEL</p>
+            <canvas id="articleChartCanvas"></canvas>
+          </div>
+          <div style="background:rgba(201,151,58,0.03);border:1px solid rgba(201,151,58,0.12);padding:24px;">
+            <h4 style="font-family:'Cinzel',serif;font-size:15px;color:var(--parchment);margin-bottom:4px;">Tren Pembaca</h4>
+            <p style="font-size:11px;font-family:'Spectral SC',serif;color:rgba(244,237,216,0.3);letter-spacing:1px;margin-bottom:16px;">6 BULAN TERAKHIR</p>
+            <canvas id="visitorChartCanvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ KONTAK ══════════ -->
+  <section id="kontak">
+    <div class="container">
+      <div class="kontak-wrap">
+        <div class="kontak-left">
+          <div class="section-tag">Hubungi DELY</div>
+          <h2 class="section-title" style="text-align:left;font-size:32px;">Diskusi & Kolaborasi</h2>
+          <p>Tersedia untuk diskusi sejarah, kuliah umum, penulisan bersama, konsultasi riset, atau sekadar berbagi kecintaan terhadap sejarah dunia. Kirim pesan dan pesan Anda akan langsung masuk ke email saya.</p>
+          <div style="margin-top:32px;padding:24px;background:rgba(201,151,58,0.05);border:1px solid rgba(201,151,58,0.2);">
+            <div style="font-family:'Spectral SC',serif;font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:14px;">RESPON WAKTU</div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(244,237,216,0.6);">
+                <span style="color:var(--gold)">📬</span> Pesan Anda terkirim langsung ke inbox saya
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(244,237,216,0.6);">
+                <span style="color:var(--gold)">⏱️</span> Biasanya dibalas dalam 1×24 jam
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(244,237,216,0.6);">
+                <span style="color:var(--gold)">🔒</span> Informasi Anda dijaga kerahasiaannya
+              </div>
+            </div>
+          </div>
+          <!-- Foto sejarah dekoratif -->
+          <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/400px-Colosseo_2020.jpg"
+              alt="Colosseum" style="width:100%;height:100px;object-fit:cover;filter:sepia(50%) brightness(0.6);border:1px solid rgba(201,151,58,0.15);"
+              onerror="this.style.display='none'">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Persepolis_Apadana_east_stairs.jpg/400px-Persepolis_Apadana_east_stairs.jpg"
+              alt="Persepolis" style="width:100%;height:100px;object-fit:cover;filter:sepia(50%) brightness(0.6);border:1px solid rgba(201,151,58,0.15);"
+              onerror="this.style.display='none'">
+          </div>
+        </div>
+        <div>
+          <form class="kontak-form" id="kontakForm">
+            <div class="fg"><label>Nama Lengkap</label><input type="text" id="formNama" name="from_name" placeholder="Nama Anda" required></div>
+            <div class="fg"><label>Email Anda</label><input type="email" id="formEmail" name="reply_to" placeholder="email@domain.com" required></div>
+            <div class="fg">
+              <label>Keperluan</label>
+              <select id="formKeperluan" name="subject">
+                <option>Diskusi Sejarah</option>
+                <option>Kuliah / Seminar</option>
+                <option>Kolaborasi Riset</option>
+                <option>Rekomendasi Buku</option>
+                <option>Media / Wawancara</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+            <div class="fg"><label>Pesan</label><textarea rows="5" id="formPesan" name="message" placeholder="Apa yang ingin Anda diskusikan?" required></textarea></div>
+            <div class="captcha-box" id="captchaBox">
+              <div class="captcha-q"><span>Verifikasi: </span><strong id="captchaQ"></strong><span> = ?</span></div>
+              <input type="number" id="captchaAns" placeholder="Jawaban" required>
+            </div>
+            <button type="submit" class="btn-kirim" id="submitBtn">
+              <span id="submitText">✉ Kirim ke DELY</span>
+            </button>
+            <div class="form-ok" id="formOk">✓ Pesan berhasil dikirim ke DELY! Anda akan mendapat konfirmasi di email.</div>
+            <div class="form-err" id="formErr" style="display:none"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer>
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="fb-logo">⚔ DELY — Sejarah Dunia</div>
+            <p>Sejarawan independen. Mengkaji peradaban besar umat manusia — dari Roma hingga Mongol, dari Sriwijaya hingga Perang Dunia.</p>
+          </div>
+          <div class="footer-links"><h5>Peradaban</h5><ul><li><a href="#peradaban">Roma</a></li><li><a href="#peradaban">Persia</a></li><li><a href="#peradaban">Mongol</a></li><li><a href="#peradaban">Islam</a></li><li><a href="#peradaban">Sriwijaya</a></li></ul></div>
+          <div class="footer-links"><h5>Konten</h5><ul><li><a href="#perang">Perang Dunia</a></li><li><a href="#artikel">Artikel</a></li><li><a href="#tokoh">Tokoh</a></li><li><a href="#debat">Debat</a></li><li><a href="#kontak">Kontak</a></li></ul></div>
+          <div class="footer-links"><h5>Tentang</h5><ul><li><a href="#cuaca">Semarang</a></li><li><a href="pages/privacy.html">Kebijakan Privasi</a></li><li><a href="pages/admin.html">Admin</a></li></ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="fb-inner">
+          <p>© 2025 DELY — Sejarah Dunia · Semarang, Indonesia</p>
+          <div class="fb-seals"><span class="fb-seal">⚔ Historia</span><span class="fb-seal">📜 Verified</span></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/features.js"></script>
+  <script>
+    // ── EMAILJS INIT ──
+    // Untuk mengaktifkan: daftar di emailjs.com, buat service Gmail, buat template, isi ID di bawah
+    const EMAILJS_SERVICE_ID  = 'service_dely';      // Ganti dengan Service ID Anda
+    const EMAILJS_TEMPLATE_ID = 'template_dely';     // Ganti dengan Template ID Anda
+    const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // Ganti dengan Public Key Anda
+    // Template EmailJS harus berisi: {{from_name}}, {{reply_to}}, {{subject}}, {{message}}
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // EmailJS init
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+      }
+
+      // Ticker duplicate
+      const t = document.getElementById('etInner');
+      if (t) { const c = t.cloneNode(true); t.parentNode.appendChild(c); }
+
+      // ── FORM SUBMIT with EmailJS ──
+      const form = document.getElementById('kontakForm');
+      form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const ans = parseInt(document.getElementById('captchaAns')?.value);
+        const ok  = document.getElementById('formOk');
+        const err = document.getElementById('formErr');
+        const btn = document.getElementById('submitBtn');
+        const txt = document.getElementById('submitText');
+
+        // Check captcha first
+        if (ans !== window._captchaAnswer) {
+          err.textContent = '✗ Jawaban verifikasi salah. Coba lagi.';
+          err.style.display = 'block';
+          ok.style.display = 'none';
+          window._genCaptcha();
+          document.getElementById('captchaAns').value = '';
+          return;
+        }
+
+        // Send via EmailJS
+        txt.textContent = '⏳ Mengirim...';
+        btn.disabled = true;
+
+        const templateParams = {
+          from_name: document.getElementById('formNama').value,
+          reply_to:  document.getElementById('formEmail').value,
+          subject:   document.getElementById('formKeperluan').value,
+          message:   document.getElementById('formPesan').value,
+          to_email:  'wnds7820@gmail.com'
+        };
+
+        try {
+          if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+          } else {
+            // Fallback: mailto link jika EmailJS belum dikonfigurasi
+            const subject = encodeURIComponent(`[DELY Sejarah] ${templateParams.subject} - dari ${templateParams.from_name}`);
+            const body = encodeURIComponent(`Nama: ${templateParams.from_name}\nEmail: ${templateParams.reply_to}\nKeperluan: ${templateParams.subject}\n\nPesan:\n${templateParams.message}`);
+            window.open(`mailto:wnds7820@gmail.com?subject=${subject}&body=${body}`, '_blank');
+          }
+          ok.style.display = 'block';
+          err.style.display = 'none';
+          form.reset();
+          window._genCaptcha();
+          txt.textContent = '✓ Terkirim!';
+          setTimeout(() => { txt.textContent = '✉ Kirim ke DELY'; btn.disabled = false; ok.style.display='none'; }, 5000);
+        } catch (error) {
+          err.textContent = '✗ Gagal mengirim. Coba lagi atau hubungi langsung via email.';
+          err.style.display = 'block';
+          txt.textContent = '✉ Kirim ke DELY';
+          btn.disabled = false;
+          console.error('EmailJS error:', error);
+        }
+      });
+    });
+
+    // ── CAPTCHA (exposed globally for form handler) ──
+    window._captchaAnswer = 0;
+    window._genCaptcha = function() {
+      const a = Math.floor(Math.random()*15)+1, b = Math.floor(Math.random()*10)+1;
+      window._captchaAnswer = a + b;
+      const el = document.getElementById('captchaQ');
+      if (el) el.textContent = `${a} + ${b}`;
+    };
+    document.addEventListener('DOMContentLoaded', window._genCaptcha);
+
+    // ── CHART OVERRIDES (history theme colors) ──
+    window.renderArticleChart = function() {
+      if (!window.Chart) { if(typeof loadChartJS==='function') loadChartJS(window.renderArticleChart); return; }
+      const canvas = document.getElementById('articleChartCanvas');
+      if (!canvas) return;
+      const ex = Chart.getChart(canvas); if (ex) ex.destroy();
+      new Chart(canvas, {
+        type: 'doughnut',
+        data: {
+          labels: ['WW2','WW1','Islam','Roma','Mongol','Sriwijaya','Persia','Lainnya'],
+          datasets: [{ data: [55,40,38,35,28,20,18,6], backgroundColor: ['#8b1a1a','#c0392b','#c9973a','#6b4c2a','#2d6a4f','#005f73','#7b2d00','#444'], borderWidth: 0 }]
+        },
+        options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'right', labels:{ color:'rgba(244,237,216,0.5)', font:{size:11}, padding:10 } } } }
+      });
+    };
+    window.renderVisitorChart = function() {
+      if (!window.Chart) { if(typeof loadChartJS==='function') loadChartJS(window.renderVisitorChart); return; }
+      const canvas = document.getElementById('visitorChartCanvas');
+      if (!canvas) return;
+      const ex = Chart.getChart(canvas); if (ex) ex.destroy();
+      new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: ['Okt','Nov','Des','Jan','Feb','Mar'],
+          datasets: [{ label:'Pembaca', data:[3200,4800,6200,5600,7900,10400], borderColor:'#c9973a', backgroundColor:'rgba(201,151,58,0.1)', fill:true, tension:0.5, pointRadius:3 }]
+        },
+        options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:{ticks:{color:'rgba(244,237,216,0.35)',font:{size:10}},grid:{color:'rgba(201,151,58,0.05)'}}, y:{ticks:{color:'rgba(244,237,216,0.35)',font:{size:10}},grid:{color:'rgba(201,151,58,0.05)'}} } }
+      });
+    };
+    window.renderRegionBarChart = function() {}; // not used
+  </script>
+</body>
+</html>
