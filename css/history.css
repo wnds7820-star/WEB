@@ -99,9 +99,29 @@ body {
 }
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
-  background:
-    url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/USMC-03537.jpg/1200px-USMC-03537.jpg')
-    center/cover no-repeat;
+  background: #020408;
+}
+/* Earth atmosphere glow ring */
+#hero::after {
+  content: '';
+  position: absolute;
+  right: -5%; top: 5%;
+  width: 55vw; height: 55vw;
+  max-width: 820px; max-height: 820px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(30,80,180,0.0) 38%,
+    rgba(30,80,180,0.12) 50%,
+    rgba(60,140,255,0.10) 58%,
+    rgba(100,180,255,0.04) 70%,
+    transparent 80%
+  );
+  pointer-events: none; z-index: 2;
+  animation: earthGlow 6s ease-in-out infinite alternate;
+}
+@keyframes earthGlow {
+  0%   { opacity: 0.7; transform: scale(1); }
+  100% { opacity: 1;   transform: scale(1.03); }
 }
 .hero-texture {
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
